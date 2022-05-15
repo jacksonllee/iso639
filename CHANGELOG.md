@@ -17,6 +17,10 @@ major/minor/micro version numbers like `05` (it'd have to be just `5`).
 ### Fixed
 ### Security
 
+## [2022.5.16]
+### Fixed
+* Corrected repo name in package metadata and documentation.
+
 ## [2022.5.15]
 
 * First release!

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "python-iso639"
-version = "2022.5.15"
+version = "2022.5.16"
 description = "Look-up utilities for ISO 639 language codes and names"
 readme = "README.md"
 requires-python = ">= 3.7"
@@ -33,8 +33,8 @@ classifiers = [
 ]
 
 [project.urls]
-source = "https://github.com/jacksonllee/python-iso639"
-tracker = "https://github.com/jacksonllee/python-iso639/issues"
+source = "https://github.com/jacksonllee/iso639"
+tracker = "https://github.com/jacksonllee/iso639/issues"
 
 [tool.setuptools.packages.find]
 where = [ "src" ]

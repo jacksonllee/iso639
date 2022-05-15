@@ -233,12 +233,12 @@ e.g., [`dataclasses.asdict`](https://docs.python.org/3/library/dataclasses.html#
 ## Links
 
 * Author: [Jackson L. Lee](https://jacksonllee.com)
-* Source code: https://github.com/jacksonllee/python-iso639
+* Source code: https://github.com/jacksonllee/iso639
 
 ## License and Data Source
 
 The `python-iso639` code is released under an Apache 2.0 license.
-Please see [LICENSE.txt](https://github.com/jacksonllee/python-iso639/blob/main/LICENSE.txt)
+Please see [LICENSE.txt](https://github.com/jacksonllee/iso639/blob/main/LICENSE.txt)
 for details.
 
 The data source that backs this package is the
@@ -256,4 +256,4 @@ but what if you want a more lightweight package with just the language codes onl
 
 If you ever notice that the upstream ISO 639-3 tables from SIL have been updated
 and yet this package isn't using the latest data,
-please ping me by [opening a GitHub issue](https://github.com/jacksonllee/python-iso639/issues).
+please ping me by [opening a GitHub issue](https://github.com/jacksonllee/iso639/issues).
