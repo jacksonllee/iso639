@@ -22,7 +22,7 @@ pip install python-iso639
 ## Usage
 
 `python-iso639` revolves around a `Language` class.
-Instances of `Language` have attributes that you will find useful.
+Instances of `Language` have attributes and methods that you will find useful.
 
 Note that while the package name registered on PyPI is `python-iso639`,
 the actual import name during runtime is `iso639`
@@ -30,7 +30,7 @@ the actual import name during runtime is `iso639`
 
 ### Creating `Language` Instances
 
-Create a `Language` instance by one of the classmethods.
+Create a `Language` instance by one of the methods.
 
 #### `from_part3`, with an ISO 639-3 code
 
