@@ -234,6 +234,28 @@ e.g., [`dataclasses.asdict`](https://docs.python.org/3/library/dataclasses.html#
 {'part3': 'fra', 'part2b': 'fre', 'part2t': 'fra', 'part1': 'fr', 'scope': 'I', 'type': 'L', 'status': 'A', 'name': 'French', 'comment': None, 'other_names': None, 'macrolanguage': None, 'retire_reason': None, 'retire_change_to': None, 'retire_remedy': None, 'retire_date': None}
 ```
 
+### Constants
+
+* `DATA_LAST_UPDATED`: The release date of the included language code data from SIL
+
+    ```python
+    >>> import iso639
+    >>> iso639.DATA_LAST_UPDATED
+    datetime.date(2022, 3, 11)
+    ```
+
+* `ALL_LANGUAGES`: The list of all `Language` objects based on the included language code data
+
+    ```python
+    >>> import iso639
+    >>> type(iso639.ALL_LANGUAGES)
+    <class 'list'>
+    >>> len(iso639.ALL_LANGUAGES)
+    7910
+    >>> iso639.ALL_LANGUAGES[0]
+    Language(part3='aaa', scope='I', type='L', status='A', name='Ghotuo', ...)
+    ```
+
 ## Links
 
 * Author: [Jackson L. Lee](https://jacksonllee.com)

@@ -6,12 +6,12 @@ import os
 import sqlite3
 from dataclasses import dataclass
 
-from typing import Iterable, List, Tuple
+from typing import Iterable, List, Tuple, Union
 
 
-_THIS_DIR = os.path.dirname(os.path.realpath(__file__))
-_DB_PATH = os.path.join(_THIS_DIR, "languages.db")
-_DB = sqlite3.connect(_DB_PATH)
+_DB = sqlite3.connect(
+    os.path.join(os.path.dirname(os.path.realpath(__file__)), "languages.db"),
+)
 
 
 @dataclass(frozen=True)
@@ -186,7 +186,7 @@ def _guess_part3(user_input: str, query_order: Iterable[Tuple[str, str]]) -> str
 
 
 @functools.lru_cache()
-def _get_language_from_part3(part3: str) -> Language:
+def _get_language_from_part3(part3: str) -> Union[Language, None]:
     """Create a ``Language`` instance.
 
     Parameters
@@ -267,3 +267,11 @@ def _get_language_from_part3(part3: str) -> Language:
     )
 
     return language
+
+
+@functools.lru_cache()
+def _get_all_languages() -> List[Language]:
+    return [
+        _get_language_from_part3(part3)
+        for part3 in [row[0] for row in _DB.execute("SELECT Id FROM codes").fetchall()]
+    ]

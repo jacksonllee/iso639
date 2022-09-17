@@ -1,6 +1,6 @@
 import datetime
 
-from iso639 import Language
+from iso639 import Language, ALL_LANGUAGES, DATA_LAST_UPDATED
 from iso639.language import Name
 
 import pytest
@@ -62,3 +62,17 @@ def test_invalid_inputs():
     assert Language.match("invalid input") is None
     assert Language.from_part3("Fra") is None  # case-sensitive!
     assert Language.from_part3("unknown code") is None
+
+
+def test_data_last_updated():
+    assert DATA_LAST_UPDATED == datetime.date(2022, 3, 11), "Need to update README.md"
+
+
+def test_all_languages():
+    assert type(ALL_LANGUAGES) == list
+    assert type(ALL_LANGUAGES[0]) == Language
+    assert len(ALL_LANGUAGES) == 7910, "Need to update README.md"
+
+    lang = ALL_LANGUAGES[0]
+    assert lang.part3 == "aaa", "Need to update README.md"
+    assert lang.name == "Ghotuo", "Need to update README.md"

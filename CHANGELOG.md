@@ -17,7 +17,13 @@ major/minor/micro version numbers like `05` (it'd have to be just `5`).
 ### Fixed
 ### Security
 
+## [2022.9.17]
+
+### Added
+* Added constants `DATA_LAST_UPDATED` and `ALL_LANGUAGES`.
+
 ## [2022.5.16]
+
 ### Fixed
 * Corrected repo name in package metadata and documentation.
 
