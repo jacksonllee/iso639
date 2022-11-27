@@ -1,6 +1,6 @@
 import datetime
 
-from iso639 import Language, ALL_LANGUAGES, DATA_LAST_UPDATED
+from iso639 import Language, ALL_LANGUAGES, DATA_LAST_UPDATED, LanguageNotFoundError
 from iso639.language import Name
 
 import pytest
@@ -59,9 +59,12 @@ def test_retired_codes():
 
 
 def test_invalid_inputs():
-    assert Language.match("invalid input") is None
-    assert Language.from_part3("Fra") is None  # case-sensitive!
-    assert Language.from_part3("unknown code") is None
+    with pytest.raises(LanguageNotFoundError):
+        Language.match("invalid input")
+    with pytest.raises(LanguageNotFoundError):
+        Language.from_part3("Fra")  # case-sensitive!
+    with pytest.raises(LanguageNotFoundError):
+        Language.from_part3("unknown code")
 
 
 def test_data_last_updated():

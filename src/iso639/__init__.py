@@ -1,16 +1,17 @@
-try:
-    from importlib.metadata import version
-except ModuleNotFoundError:
-    # For Python 3.7
-    from importlib_metadata import version
-
 import datetime
+from importlib.metadata import version
 
-from .language import Language, _get_all_languages
+from .language import Language, LanguageNotFoundError, _get_all_languages
 
 
 __version__ = version("python-iso639")
-__all__ = ["__version__", "Language", "ALL_LANGUAGES", "DATA_LAST_UPDATED"]
+__all__ = [
+    "__version__",
+    "ALL_LANGUAGES",
+    "DATA_LAST_UPDATED",
+    "Language",
+    "LanguageNotFoundError",
+]
 
 DATA_LAST_UPDATED = datetime.date(2022, 3, 11)
 

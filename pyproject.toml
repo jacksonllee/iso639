@@ -4,14 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "python-iso639"
-version = "2022.9.17"
+version = "2022.11.27"
 description = "Look-up utilities for ISO 639 language codes and names"
 readme = "README.md"
-requires-python = ">= 3.7"
+requires-python = ">= 3.8"
 license = { text = "Apache 2.0" }
 authors = [ { name = "Jackson L. Lee", email = "jacksonlunlee@gmail.com" } ]
 keywords = ["ISO 639", "language codes", "languages", "linguistics"]
-dependencies = [ 'importlib-metadata; python_version < "3.8"' ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
@@ -22,10 +21,10 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Topic :: Text Processing",
     "Topic :: Text Processing :: General",
     "Topic :: Text Processing :: Indexing",
@@ -45,4 +44,5 @@ package-dir = { "" = "src" }
 package-data = { "iso639" = ["languages.db"] }
 
 [tool.pytest.ini_options]
+addopts = "-vv --durations=0 --strict-markers"
 testpaths = [ "tests" ]

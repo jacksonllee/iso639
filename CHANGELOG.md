@@ -17,6 +17,20 @@ major/minor/micro version numbers like `05` (it'd have to be just `5`).
 ### Fixed
 ### Security
 
+## [2022.11.27]
+
+### Added
+* Defined the `LanguageNotFoundError` exception.
+* Added support for Python 3.11.
+
+### Changed
+* If the `Language` class methods `match`, `from_part3`, etc. receive an invalid
+  input language code or name, a `LanguageNotFoundError` is now raised.
+  (Previously, `None` was returned with no exception raised.)
+
+### Removed
+* Dropped support for Python 3.7.
+
 ## [2022.9.17]
 
 ### Added

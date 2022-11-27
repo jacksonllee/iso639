@@ -6,12 +6,16 @@ import os
 import sqlite3
 from dataclasses import dataclass
 
-from typing import Iterable, List, Tuple, Union
+from typing import Iterable, List, Optional, Tuple
 
 
 _DB = sqlite3.connect(
     os.path.join(os.path.dirname(os.path.realpath(__file__)), "languages.db"),
 )
+
+
+class LanguageNotFoundError(Exception):
+    pass
 
 
 @dataclass(frozen=True)
@@ -113,37 +117,27 @@ class Language:
             ("name_index", "Print_Name"),
             ("name_index", "Inverted_Name"),
         )
-        part3 = _guess_part3(user_input, query_order)
-        language = _get_language_from_part3(part3)
-        return language
+        return _get_language(user_input, query_order)
 
     @classmethod
     def from_part3(cls, user_input) -> "Language":
         """Return a ``Language`` instance from an ISO 639-3 code."""
-        part3 = _guess_part3(user_input, (("codes", "Id"),))
-        language = _get_language_from_part3(part3)
-        return language
+        return _get_language(user_input, (("codes", "Id"),))
 
     @classmethod
     def from_part2b(cls, user_input) -> "Language":
         """Return a ``Language`` instance from an ISO 639-2 (bibliographic) code."""
-        part3 = _guess_part3(user_input, (("codes", "Part2B"),))
-        language = _get_language_from_part3(part3)
-        return language
+        return _get_language(user_input, (("codes", "Part2B"),))
 
     @classmethod
     def from_part2t(cls, user_input) -> "Language":
         """Return a ``Language`` instance from an ISO 639-2 (terminological) code."""
-        part3 = _guess_part3(user_input, (("codes", "Part2T"),))
-        language = _get_language_from_part3(part3)
-        return language
+        return _get_language(user_input, (("codes", "Part2T"),))
 
     @classmethod
     def from_part1(cls, user_input) -> "Language":
         """Return a ``Language`` instance from an ISO 639-1 code."""
-        part3 = _guess_part3(user_input, (("codes", "Part1"),))
-        language = _get_language_from_part3(part3)
-        return language
+        return _get_language(user_input, (("codes", "Part1"),))
 
     @classmethod
     def from_name(cls, user_input) -> "Language":
@@ -153,9 +147,7 @@ class Language:
             ("name_index", "Print_Name"),
             ("name_index", "Inverted_Name"),
         )
-        part3 = _guess_part3(user_input, query_order)
-        language = _get_language_from_part3(part3)
-        return language
+        return _get_language(user_input, query_order)
 
 
 def _query_db(table: str, field: str, x: str) -> sqlite3.Cursor:
@@ -163,43 +155,42 @@ def _query_db(table: str, field: str, x: str) -> sqlite3.Cursor:
 
 
 @functools.lru_cache()
-def _guess_part3(user_input: str, query_order: Iterable[Tuple[str, str]]) -> str:
-    """Guess the ISO 639-3 code.
-
-    Parameters
-    ----------
-    user_input : str
-    query_order : Iterable[Tuple[str, str]
-        An iterable of (table, field) pairs to specify query order
-
-    Returns
-    -------
-    str
-        An ISO 639-3 code.
-        None if the user input isn't a language code or name.
-    """
-    for table, field in query_order:
-        result = _query_db(table, field, user_input).fetchone()
-        if result:
-            language_id = result[0]
-            return language_id
-
-
-@functools.lru_cache()
-def _get_language_from_part3(part3: str) -> Union[Language, None]:
+def _get_language(
+    user_input: str, query_order: Optional[Iterable[Tuple[str, str]]] = None
+) -> Language:
     """Create a ``Language`` instance.
 
     Parameters
     ----------
-    part3 : str
-        An ISO 639-3 code.
+    user_input : str
+        The user-provided language code or name.
+    query_order : Iterable[Tuple[str, str], optional
+        An iterable of (table, field) pairs to specify query order.
+        If not provided, no queries are made and `part3` is assumed to be
+        an actual ISO 639-3 code.
 
     Returns
     -------
-    Language or None
+    Language
+
+    Raises
+    ------
+    LanguageNotFoundError
+        If `part3` isn't a language name or code
     """
-    if not part3:
-        return None
+
+    if query_order is not None:
+        for table, field in query_order:
+            result = _query_db(table, field, user_input).fetchone()
+            if result:
+                part3 = result[0]
+                break
+        else:
+            raise LanguageNotFoundError(
+                f"{user_input!r} isn't an ISO language code or name"
+            )
+    else:
+        part3 = user_input
 
     def query_for_id(table: str) -> sqlite3.Cursor:
         id_field = "I_Id" if table == "macrolanguages" else "Id"
@@ -272,6 +263,6 @@ def _get_language_from_part3(part3: str) -> Union[Language, None]:
 @functools.lru_cache()
 def _get_all_languages() -> List[Language]:
     return [
-        _get_language_from_part3(part3)
+        _get_language(part3)
         for part3 in [row[0] for row in _DB.execute("SELECT Id FROM codes").fetchall()]
     ]

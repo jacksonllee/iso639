@@ -52,13 +52,18 @@ Language(part3='fra', part2b='fre', part2t='fra', part1='fr', scope='I', type='L
 >>> lang5 = iso639.Language.from_name('French')  # ISO 639-3 reference language name
 ```
 
-#### You Get `None` for Invalid Inputs
-
-The user input is case-sensitive!
+#### A `LanguageNotFoundError` is Raised for Invalid Inputs
 
 ```python
->>> None == iso639.Language.from_part3('Fra') == iso639.Language.from_name("unknown language")
-True
+>>> iso639.Language.from_part3('Fra')  # The user input is case-sensitive!
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+LanguageNotFoundError: 'Fra' isn't an ISO language code or name
+>>>
+>>> iso639.Language.from_name("unknown language")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+LanguageNotFoundError: 'unknown language' isn't an ISO language code or name
 ```
 
 ### Accessing Attributes
@@ -108,21 +113,13 @@ accessing a specific attribute from unknown inputs, e.g., the ISO 639-3 code.
 True
 ```
 
-If there's no match, `None` is returned.
-You may need to catch a potential `AttributeError`:
+If there's no match, a `LanguageNotFoundError` is raised,
+which you may want to catch:
 
 ```python
->>> lang = iso639.Language.match('not gonna find a match')
->>> lang is None
-True
->>> lang.part3
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-AttributeError: 'NoneType' object has no attribute 'part3'
 >>> try:
-...     code = lang.part3
-... except AttributeError:
-...     code = None
+...     lang = iso639.Language.match('not gonna find a match')
+... except iso639.LanguageNotFoundError:
 ...     print("no match found!")
 ... 
 no match found!
@@ -217,7 +214,7 @@ Beyond that, the precise order in matching is as follows:
 
 Only exact matching is done (there's no fuzzy string matching of any sort).
 As soon as a match is found, `Language.match` returns a `Language` instance.
-If there isn't a match, `None` is returned.
+If there isn't a match, a `LanguageNotFoundError` is raised.
 
 ### `Language` is a dataclass
 
