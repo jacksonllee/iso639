@@ -38,7 +38,7 @@ jobs:
           # dist/<pkg-name>-x.y.z.tar.gz and dist/<pkg-name>-x.y.z-py3-none-any.whl
           name: Build source distribution and install package from it
           command: |
-              pip install -r dev-requirements.txt && \
+              pip install ".[dev]" && \
               python -m build && \
               pip install dist/`ls dist/ | grep .whl`
       - run:
@@ -63,8 +63,7 @@ jobs:
           shell: bash.exe
           command: |
             python --version && \
-            pip install -r dev-requirements.txt && \
-            pip install . && \
+            pip install ".[dev]" && \
             pip list && \
             pytest
 
@@ -75,17 +74,17 @@ workflows:
       - pre-build:
           name: flake8
           command-run: |
-            pip install -r dev-requirements.txt && \
+            pip install ".[dev]" && \
             flake8 src tests scripts
       - pre-build:
           name: black
           command-run:  |
-            pip install -r dev-requirements.txt && \
+            pip install ".[dev]" && \
             black --check src tests scripts
       - pre-build:
           name: twine
           command-run: |
-            pip install -r dev-requirements.txt && \
+            pip install ".[dev]" && \
             python -m build && \
             twine check dist/`ls dist/ | grep .tar.gz` && \
             twine check dist/`ls dist/ | grep .whl`

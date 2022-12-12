@@ -17,8 +17,7 @@ and install the package in the "editable" mode for development work:
 ```bash
 git clone https://github.com/<your-github-username>/iso639.git
 cd iso639
-pip install -r dev-requirements.txt
-pip install -e .
+pip install -e ".[dev]"
 ```
 
 ## Working on a Feature or Bug Fix
