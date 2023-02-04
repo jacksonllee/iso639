@@ -17,10 +17,10 @@ import sqlite3
 
 # These default filenames are exactly those from SIL as of May 2022.
 _DEFAULT_FILENAMES = {
-    "codes": "iso-639-3_20220311.tab",
-    "name_index": "iso-639-3_Name_Index_20220311.tab",
-    "macrolanguages": "iso-639-3-macrolanguages_20220311.tab",
-    "retirements": "iso-639-3_Retirements_20220311.tab",
+    "codes": "iso-639-3_20230123.tab",
+    "name_index": "iso-639-3_Name_Index_20230123.tab",
+    "macrolanguages": "iso-639-3-macrolanguages_20230123.tab",
+    "retirements": "iso-639-3_Retirements_20230123.tab",
 }
 
 _THIS_DIR = os.path.dirname(os.path.realpath(__file__))
