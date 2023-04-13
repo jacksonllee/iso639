@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "python-iso639"
-version = "2023.2.4"
+version = "2023.4.13"
 description = "Look-up utilities for ISO 639 language codes and names"
 readme = "README.md"
 requires-python = ">= 3.8"

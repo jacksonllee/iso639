@@ -17,6 +17,11 @@ major/minor/micro version numbers like `05` (it'd have to be just `5`).
 ### Fixed
 ### Security
 
+## [2023.4.13]
+
+### Changed
+* Disabled thread checking for the database, as it's read-only (#1).
+
 ## [2023.2.4]
 
 ### Changed
