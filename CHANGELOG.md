@@ -17,6 +17,11 @@ major/minor/micro version numbers like `05` (it'd have to be just `5`).
 ### Fixed
 ### Security
 
+## [2023.6.15]
+
+### Fixed
+* Made `Language` class instances actually hashable (#3).
+
 ## [2023.4.13]
 
 ### Changed

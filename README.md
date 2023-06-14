@@ -267,6 +267,8 @@ for details.
 The data source that backs this package is the
 [language code tables published by SIL](https://iso639-3.sil.org/code_tables/download_tables).
 Note that SIL resources have their [terms of use](https://www.sil.org/terms-use).
+For exactly how the data is included in the package,
+see the script at [`scripts/create_languages_db.py`](scripts/create_languages_db.py).
 
 ## Why Another ISO 639 Package?
 
