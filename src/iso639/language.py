@@ -77,6 +77,12 @@ class Language:
     retire_remedy: str
     retire_date: datetime.date
 
+    def __hash__(self) -> int:
+        return hash(self.part3)
+
+    def __eq__(self, other) -> bool:
+        return isinstance(other, Language) and self.part3 == other.part3
+
     @classmethod
     def match(cls, user_input) -> "Language":
         """Return a ``Language`` instance by matching on the user input.

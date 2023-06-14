@@ -79,3 +79,25 @@ def test_all_languages():
     lang = ALL_LANGUAGES[0]
     assert lang.part3 == "aaa", "Need to update README.md"
     assert lang.name == "Ghotuo", "Need to update README.md"
+
+
+def test_eq():
+    yue1 = Language.match("yue")
+    yue2 = Language.match("yue")
+    fra = Language.match("fra")
+
+    assert yue1.part3 == yue2.part3 == "yue"
+    assert fra.part3 == "fra"
+    assert yue1 == yue2
+    assert yue1 != fra
+
+
+def test_hashable():
+    """Language class instances are hashable, e.g., can be in a set.
+    See https://github.com/jacksonllee/iso639/issues/3
+    """
+    cat = Language.match("cat")
+    assert cat.part3 == "cat"
+    assert type(cat.other_names) == list  # Need a list attr for the hashing test...
+    hash(cat)  # Shouldn't error!
+    assert len({cat, cat, cat}) == 1
