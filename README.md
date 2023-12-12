@@ -2,6 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/python-iso639.svg)](https://pypi.org/project/python-iso639/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/python-iso639.svg)](https://pypi.org/project/python-iso639/)
+[![PyPI downloads last month](https://img.shields.io/pypi/dm/python-iso639)](https://pypi.org/project/python-iso639/)
 [![CircleCI Builds](https://circleci.com/gh/jacksonllee/iso639.svg?style=shield)](https://circleci.com/gh/jacksonllee/iso639)
 
 `python-iso639` is a Python package for accessing ISO 639 language codes, names, and

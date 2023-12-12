@@ -72,8 +72,8 @@ def test_data_last_updated():
 
 
 def test_all_languages():
-    assert type(ALL_LANGUAGES) == list
-    assert type(ALL_LANGUAGES[0]) == Language
+    assert type(ALL_LANGUAGES) is list
+    assert type(ALL_LANGUAGES[0]) is Language
     assert len(ALL_LANGUAGES) == 7916, "Need to update README.md"
 
     lang = ALL_LANGUAGES[0]
@@ -98,6 +98,6 @@ def test_hashable():
     """
     cat = Language.match("cat")
     assert cat.part3 == "cat"
-    assert type(cat.other_names) == list  # Need a list attr for the hashing test...
+    assert type(cat.other_names) is list  # Need a list attr for the hashing test...
     hash(cat)  # Shouldn't error!
     assert len({cat, cat, cat}) == 1

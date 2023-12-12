@@ -17,6 +17,11 @@ major/minor/micro version numbers like `05` (it'd have to be just `5`).
 ### Fixed
 ### Security
 
+## [2023.12.11]
+
+### Added
+* Added support for Python 3.12.
+
 ## [2023.6.15]
 
 ### Fixed

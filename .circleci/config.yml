@@ -11,7 +11,7 @@ jobs:
         type: string
     docker:
       # Pick the highest Python 3.x version that this package is known to support
-      - image: cimg/python:3.11
+      - image: cimg/python:3.12
         #auth:
         #  username: $DOCKERHUB_USERNAME
         #  password: $DOCKERHUB_PASSWORD
@@ -110,7 +110,7 @@ workflows:
             - bandit
           matrix:
             parameters:
-              python-version: ["3.8", "3.9", "3.10", "3.11"]
+              python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
       - build-python-win:
           requires:
             - flake8
