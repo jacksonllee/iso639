@@ -15,12 +15,12 @@ import logging
 import os
 import sqlite3
 
-# These default filenames are exactly those from SIL as of May 2022.
+# These default filenames are exactly those from SIL as of Jan 2023.
 _DEFAULT_FILENAMES = {
-    "codes": "iso-639-3_20230123.tab",
-    "name_index": "iso-639-3_Name_Index_20230123.tab",
-    "macrolanguages": "iso-639-3-macrolanguages_20230123.tab",
-    "retirements": "iso-639-3_Retirements_20230123.tab",
+    "codes": "iso-639-3_20231220.tab",
+    "name_index": "iso-639-3_Name_Index_20231220.tab",
+    "macrolanguages": "iso-639-3-macrolanguages_20231220.tab",
+    "retirements": "iso-639-3-Retirements_20231220.tab",
 }
 
 _THIS_DIR = os.path.dirname(os.path.realpath(__file__))
