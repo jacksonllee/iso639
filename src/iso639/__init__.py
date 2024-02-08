@@ -13,7 +13,7 @@ __all__ = [
     "LanguageNotFoundError",
 ]
 
-DATA_LAST_UPDATED = datetime.date(2023, 12, 20)
+DATA_LAST_UPDATED = datetime.date(2024, 1, 10)
 
 
 def __getattr__(name):

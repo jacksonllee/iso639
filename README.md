@@ -239,7 +239,7 @@ e.g., [`dataclasses.asdict`](https://docs.python.org/3/library/dataclasses.html#
     ```python
     >>> import iso639
     >>> iso639.DATA_LAST_UPDATED
-    datetime.date(2023, 12, 20)
+    datetime.date(2024, 2, 7)
     ```
 
 * `ALL_LANGUAGES`: The list of all `Language` objects based on the included language code data
@@ -249,7 +249,7 @@ e.g., [`dataclasses.asdict`](https://docs.python.org/3/library/dataclasses.html#
     >>> type(iso639.ALL_LANGUAGES)
     <class 'list'>
     >>> len(iso639.ALL_LANGUAGES)
-    7920
+    7919
     >>> iso639.ALL_LANGUAGES[0]
     Language(part3='aaa', scope='I', type='L', status='A', name='Ghotuo', ...)
     ```
