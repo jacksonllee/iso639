@@ -5,7 +5,7 @@
 [![PyPI downloads last month](https://img.shields.io/pypi/dm/python-iso639)](https://pypi.org/project/python-iso639/)
 [![CircleCI Builds](https://circleci.com/gh/jacksonllee/iso639.svg?style=shield)](https://circleci.com/gh/jacksonllee/iso639)
 
-`python-iso639` is a Python package for accessing ISO 639 language codes, names, and
+`python-iso639` is a Python package for ISO 639 language codes, names, and
 other associated information.
 
 Current features:
@@ -221,7 +221,7 @@ If there isn't a match, a `LanguageNotFoundError` is raised.
 
 The `Language` class is a dataclass.
 All functionality of
-[dataclases](https://docs.python.org/3/library/dataclasses.html)
+[dataclasses](https://docs.python.org/3/library/dataclasses.html)
 applies to `Language` and its instances,
 e.g., [`dataclasses.asdict`](https://docs.python.org/3/library/dataclasses.html#dataclasses.asdict):
 
@@ -239,7 +239,7 @@ e.g., [`dataclasses.asdict`](https://docs.python.org/3/library/dataclasses.html#
     ```python
     >>> import iso639
     >>> iso639.DATA_LAST_UPDATED
-    datetime.date(2024, 2, 7)
+    datetime.date(2024, 4, 15)
     ```
 
 * `ALL_LANGUAGES`: The list of all `Language` objects based on the included language code data
@@ -249,7 +249,7 @@ e.g., [`dataclasses.asdict`](https://docs.python.org/3/library/dataclasses.html#
     >>> type(iso639.ALL_LANGUAGES)
     <class 'list'>
     >>> len(iso639.ALL_LANGUAGES)
-    7919
+    7920
     >>> iso639.ALL_LANGUAGES[0]
     Language(part3='aaa', scope='I', type='L', status='A', name='Ghotuo', ...)
     ```

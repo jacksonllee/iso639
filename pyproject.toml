@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "python-iso639"
-version = "2024.2.7"
-description = "Look-up utilities for ISO 639 language codes and names"
+version = "2024.4.27"
+description = "ISO 639 language codes, names, and other associated information"
 readme = "README.md"
 requires-python = ">= 3.8"
 license = { text = "Apache 2.0" }
@@ -34,11 +34,12 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = [
-    "black == 24.1.1",
-    "build == 1.0.3",
+    "black == 24.4.2",
+    "build == 1.2.1",
     "flake8 == 7.0.0",
-    "pytest == 8.0.0",
-    "twine == 4.0.2",
+    "pytest == 8.1.2",
+    "requests == 2.31.0",
+    "twine == 5.0.0",
 ]
 
 [project.urls]
