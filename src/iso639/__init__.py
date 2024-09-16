@@ -3,7 +3,7 @@ import datetime
 from .language import Language, LanguageNotFoundError, _get_all_languages
 
 
-__version__ = "2024.4.15"
+__version__ = "2024.9.16"
 __all__ = [
     "__version__",
     "ALL_LANGUAGES",
@@ -12,7 +12,7 @@ __all__ = [
     "LanguageNotFoundError",
 ]
 
-DATA_LAST_UPDATED = datetime.date(2024, 4, 15)
+DATA_LAST_UPDATED = datetime.date(2024, 9, 16)
 
 
 def __getattr__(name):
