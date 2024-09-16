@@ -1,10 +1,9 @@
 import datetime
-from importlib.metadata import version
 
 from .language import Language, LanguageNotFoundError, _get_all_languages
 
 
-__version__ = version("python-iso639")
+__version__ = "2024.4.15"
 __all__ = [
     "__version__",
     "ALL_LANGUAGES",
