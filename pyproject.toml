@@ -21,7 +21,6 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -34,12 +33,12 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = [
-    "black == 24.4.2",
+    "black == 24.10.0",
     "build == 1.2.1",
-    "flake8 == 7.0.0",
-    "pytest == 8.1.2",
-    "requests == 2.31.0",
-    "twine == 5.0.0",
+    "flake8 == 7.1.1",
+    "pytest == 8.3.3",
+    "requests == 2.32.3",
+    "twine == 5.1.1",
 ]
 
 [project.urls]

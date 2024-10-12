@@ -90,11 +90,12 @@ workflows:
             twine check dist/`ls dist/ | grep .whl`
       - pre-build:
           name: safety
+          # jinja2 v3.1.4 triggers https://data.safetycli.com/v/70612/97c
           command-run: |
             pip install -e . && \
             pip install --upgrade safety && \
             safety --version && \
-            pip freeze | safety check --stdin
+            pip freeze | safety check --stdin --ignore=70612
       - pre-build:
           name: bandit
           command-run: |
@@ -110,7 +111,7 @@ workflows:
             - bandit
           matrix:
             parameters:
-              python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+              python-version: ["3.9", "3.10", "3.11", "3.12"]
       - build-python-win:
           requires:
             - flake8

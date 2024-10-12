@@ -14,7 +14,11 @@ major/minor/micro version numbers like `05` (it'd have to be just `5`).
 ### Changed
 ### Deprecated
 ### Removed
+* Dropped support for Python 3.8.
+
 ### Fixed
+* Added `CHANGELOG.md` to the PyPI source distribution.
+
 ### Security
 
 ## [2024.4.27]
