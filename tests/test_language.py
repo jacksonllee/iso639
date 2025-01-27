@@ -27,7 +27,7 @@ def test_name():
     assert name.inverted == "bar"
 
 
-def test_attributes():
+def test_attributes_cantonese():
     language = Language.match("yue")
     assert language.part3 == "yue"
     assert language.part2b is None
@@ -46,13 +46,34 @@ def test_attributes():
     assert language.retire_date is None
 
 
+def test_attributes_french():
+    language = Language.match("fra")
+    assert language.part3 == "fra"
+    assert language.part2b == "fre"
+    assert language.part2t == "fra"
+    assert language.part1 == "fr"
+    assert language.scope == "I"
+    assert language.type == "L"
+    assert language.status == "A"
+    assert language.name == "French"
+    assert language.comment is None
+    assert language.other_names is None
+    assert language.macrolanguage is None
+    assert language.retire_reason is None
+    assert language.retire_change_to is None
+    assert language.retire_remedy is None
+    assert language.retire_date is None
+
+
 def test_retired_codes():
-    language = Language.match("bvs")
-    assert language.name == "Belgian Sign Language"
-    assert language.status == "R"
-    assert language.retire_reason == "S"
-    assert language.retire_date == datetime.date(2007, 7, 18)
-    assert language.retire_remedy == (
+    lang1 = Language.match("bvs")
+    lang2 = Language.from_part3("bvs")
+    assert lang1 == lang2
+    assert lang1.name == "Belgian Sign Language"
+    assert lang1.status == "R"
+    assert lang1.retire_reason == "S"
+    assert lang1.retire_date == datetime.date(2007, 7, 18)
+    assert lang1.retire_remedy == (
         "Split into Langue des signes de Belgique Francophone [sfb], "
         "and Vlaamse Gebarentaal [vgt]"
     )
@@ -68,17 +89,14 @@ def test_invalid_inputs():
 
 
 def test_data_last_updated():
-    assert DATA_LAST_UPDATED == datetime.date(2024, 4, 15), "Need to update README.md"
+    assert DATA_LAST_UPDATED == datetime.date(2025, 1, 15), "Need to update README.md"
 
 
 def test_all_languages():
-    assert type(ALL_LANGUAGES) is list
-    assert type(ALL_LANGUAGES[0]) is Language
-    assert len(ALL_LANGUAGES) == 7920, "Need to update README.md"
-
-    lang = ALL_LANGUAGES[0]
-    assert lang.part3 == "aaa", "Need to update README.md"
-    assert lang.name == "Ghotuo", "Need to update README.md"
+    assert type(ALL_LANGUAGES) is set
+    assert len(ALL_LANGUAGES) == 8307, "Need to update README.md"
+    lang = list(ALL_LANGUAGES)[0]
+    assert type(lang) is Language
 
 
 def test_eq():

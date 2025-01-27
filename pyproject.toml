@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "python-iso639"
-version = "2024.10.22"
+version = "2025.1.27"
 description = "ISO 639 language codes, names, and other associated information"
 readme = "README.md"
-requires-python = ">= 3.8"
+requires-python = ">= 3.9"
 license = { text = "Apache 2.0" }
 authors = [ { name = "Jackson L. Lee", email = "jacksonlunlee@gmail.com" } ]
 keywords = ["ISO 639", "language codes", "languages", "linguistics"]
@@ -35,11 +35,12 @@ classifiers = [
 [project.optional-dependencies]
 dev = [
     "black == 24.10.0",
-    "build == 1.2.1",
+    "build == 1.2.2",
     "flake8 == 7.1.1",
-    "pytest == 8.3.3",
+    "mypy == 1.14.1",
+    "pytest == 8.3.4",
     "requests == 2.32.3",
-    "twine == 5.1.1",
+    "twine == 6.1.0",
 ]
 
 [project.urls]
@@ -51,7 +52,7 @@ where = [ "src" ]
 [tool.setuptools]
 zip-safe = false
 package-dir = { "" = "src" }
-package-data = { "iso639" = ["languages.db"] }
+package-data = { "iso639" = ["_data/*.tab"] }
 
 [tool.pytest.ini_options]
 addopts = "-vv --durations=0 --strict-markers"

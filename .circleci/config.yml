@@ -75,12 +75,17 @@ workflows:
           name: flake8
           command-run: |
             pip install ".[dev]" && \
-            flake8 src tests scripts
+            flake8 src tests
       - pre-build:
           name: black
           command-run:  |
             pip install ".[dev]" && \
-            black --check src tests scripts
+            black --check src tests
+      - pre-build:
+          name: mypy
+          command-run:  |
+            pip install ".[dev]" && \
+            mypy src
       - pre-build:
           name: twine
           command-run: |
@@ -106,6 +111,7 @@ workflows:
           requires:
             - flake8
             - black
+            - mypy
             - twine
             - safety
             - bandit
@@ -116,6 +122,7 @@ workflows:
           requires:
             - flake8
             - black
+            - mypy
             - twine
             - safety
             - bandit

@@ -17,6 +17,16 @@ major/minor/micro version numbers like `05` (it'd have to be just `5`).
 ### Fixed
 ### Security
 
+## [2025.1.27]
+
+### Changed
+* Updated the ISO 639 data from SIL to the latest 2025-01-15 release.
+* The data tables are now included as the original tab-separated value files
+  instead of a compiled SQLite database.
+
+### Fixed
+* Fixed `Language.from_part3` so that it now also works for a retired ISO 639-3 code.
+
 ## [2024.10.22]
 
 ### Added

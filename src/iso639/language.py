@@ -1,17 +1,29 @@
 """The Language class."""
 
+from __future__ import annotations
+
 import datetime
 import functools
-import os
-import sqlite3
 from dataclasses import dataclass
 
-from typing import Iterable, List, Optional, Tuple
+from typing import List, Union, Set, Tuple
 
-
-_DB = sqlite3.connect(
-    os.path.join(os.path.dirname(os.path.realpath(__file__)), "languages.db"),
-    check_same_thread=False,
+from ._data import (
+    _PART3_TO_CODES,
+    _PART3_TO_NAME_INDEX,
+    _PART3_TO_MACROLANGUAGES,
+    _PART3_TO_RETIREMENTS,
+    _PART2B_TO_PART3,
+    _PART2T_TO_PART3,
+    _PART1_TO_PART3,
+    _REF_NAME_TO_PART3,
+    _PRINT_NAME_TO_PART3,
+    _INVERTED_NAME_TO_PART3,
+    _CodesColumn,
+    _NameIndexColumn,
+    _RetirementsColumn,
+    _MacrolanguagesColumn,
+    _COLUMN_TYPE,
 )
 
 
@@ -56,26 +68,31 @@ class Language:
 
     # From the "codes" table
     part3: str
-    part2b: str
-    part2t: str
-    part1: str
+    # Although Union[..., None] and Optional[...] are equivalent, I prefer Union.
+    # Optional simply doesn't sound right, as it would imply that the attribute in
+    # question is optional, which it's not.
+    # When support for Python 3.9 is dropped, we will switch to the pipe syntax
+    # for `... | None`.
+    part2b: Union[str, None]
+    part2t: Union[str, None]
+    part1: Union[str, None]
     scope: str
-    type: str
+    type: Union[str, None]
     status: str
     name: str
-    comment: str
+    comment: Union[str, None]
 
     # From the "name_index" table
-    other_names: List[Name]
+    other_names: Union[List[Name], None]
 
     # From the "macrolanguages" table
-    macrolanguage: str
+    macrolanguage: Union[str, None]
 
     # From the "retirements" table
-    retire_reason: str
-    retire_change_to: str
-    retire_remedy: str
-    retire_date: datetime.date
+    retire_reason: Union[str, None]
+    retire_change_to: Union[str, None]
+    retire_remedy: Union[str, None]
+    retire_date: Union[datetime.date, None]
 
     def __hash__(self) -> int:
         return hash(self.part3)
@@ -84,7 +101,7 @@ class Language:
         return isinstance(other, Language) and self.part3 == other.part3
 
     @classmethod
-    def match(cls, user_input) -> "Language":
+    def match(cls, user_input) -> Language:
         """Return a ``Language`` instance by matching on the user input.
 
         Parameters
@@ -111,70 +128,63 @@ class Language:
         * ISO 639-3 alternative language names (the "print" ones)
         * ISO 639-3 alternative language names (the "inverted" ones)
         """
-        # Order of (table, field) pairs to query `languages.db`.
+        # Order of columns to query the data tables.
         # Bias towards (and therefore prioritize) the user input being
         # a language code rather than a language name.
         query_order = (
-            ("codes", "Id"),
-            ("codes", "Part2B"),
-            ("codes", "Part2T"),
-            ("codes", "Part1"),
-            ("retirements", "Id"),
-            ("codes", "Ref_Name"),
-            ("name_index", "Print_Name"),
-            ("name_index", "Inverted_Name"),
+            _CodesColumn.ID,
+            _CodesColumn.PART2B,
+            _CodesColumn.PART2T,
+            _CodesColumn.PART1,
+            _RetirementsColumn.ID,
+            _CodesColumn.REF_NAME,
+            _NameIndexColumn.PRINT_NAME,
+            _NameIndexColumn.INVERTED_NAME,
         )
         return _get_language(user_input, query_order)
 
     @classmethod
-    def from_part3(cls, user_input) -> "Language":
+    def from_part3(cls, user_input) -> Language:
         """Return a ``Language`` instance from an ISO 639-3 code."""
-        return _get_language(user_input, (("codes", "Id"),))
+        return _get_language(user_input, (_CodesColumn.ID, _RetirementsColumn.ID))
 
     @classmethod
-    def from_part2b(cls, user_input) -> "Language":
+    def from_part2b(cls, user_input) -> Language:
         """Return a ``Language`` instance from an ISO 639-2 (bibliographic) code."""
-        return _get_language(user_input, (("codes", "Part2B"),))
+        return _get_language(user_input, (_CodesColumn.PART2B,))
 
     @classmethod
-    def from_part2t(cls, user_input) -> "Language":
+    def from_part2t(cls, user_input) -> Language:
         """Return a ``Language`` instance from an ISO 639-2 (terminological) code."""
-        return _get_language(user_input, (("codes", "Part2T"),))
+        return _get_language(user_input, (_CodesColumn.PART2T,))
 
     @classmethod
-    def from_part1(cls, user_input) -> "Language":
+    def from_part1(cls, user_input) -> Language:
         """Return a ``Language`` instance from an ISO 639-1 code."""
-        return _get_language(user_input, (("codes", "Part1"),))
+        return _get_language(user_input, (_CodesColumn.PART1,))
 
     @classmethod
-    def from_name(cls, user_input) -> "Language":
+    def from_name(cls, user_input) -> Language:
         """Return a ``Language`` instance from an ISO 639-3 reference language name."""
         query_order = (
-            ("codes", "Ref_Name"),
-            ("name_index", "Print_Name"),
-            ("name_index", "Inverted_Name"),
+            _CodesColumn.REF_NAME,
+            _NameIndexColumn.PRINT_NAME,
+            _NameIndexColumn.INVERTED_NAME,
         )
         return _get_language(user_input, query_order)
-
-
-def _query_db(table: str, field: str, x: str) -> sqlite3.Cursor:
-    return _DB.execute(f"SELECT * FROM {table} where {field} = ?", (x,))  # nosec
 
 
 @functools.lru_cache()
-def _get_language(
-    user_input: str, query_order: Optional[Iterable[Tuple[str, str]]] = None
-) -> Language:
+def _get_language(user_input: str, query_order: Tuple[_COLUMN_TYPE]) -> Language:
     """Create a ``Language`` instance.
 
     Parameters
     ----------
     user_input : str
         The user-provided language code or name.
-    query_order : Iterable[Tuple[str, str], optional
-        An iterable of (table, field) pairs to specify query order.
-        If not provided, no queries are made and `part3` is assumed to be
-        an actual ISO 639-3 code.
+    query_order : Tuple[_COLUMN_TYPE]
+        A tuple of columns to specify query order.
+        A tuple but not a list because this argument needs to be hashable for lru_cache.
 
     Returns
     -------
@@ -185,54 +195,78 @@ def _get_language(
     LanguageNotFoundError
         If `part3` isn't a language name or code
     """
-
-    if query_order is not None:
-        for table, field in query_order:
-            result = _query_db(table, field, user_input).fetchone()
-            if result:
-                part3 = result[0]
+    part3: Union[str, None] = None
+    for column in query_order:
+        if column == _CodesColumn.ID:
+            if user_input in _PART3_TO_CODES:
+                part3 = user_input
                 break
+        elif column == _CodesColumn.PART2B:
+            part3 = _PART2B_TO_PART3.get(user_input)
+        elif column == _CodesColumn.PART2T:
+            part3 = _PART2T_TO_PART3.get(user_input)
+        elif column == _CodesColumn.PART1:
+            part3 = _PART1_TO_PART3.get(user_input)
+        elif column == _RetirementsColumn.ID:
+            if user_input in _PART3_TO_RETIREMENTS:
+                part3 = user_input
+                break
+        elif column == _CodesColumn.REF_NAME:
+            part3 = _REF_NAME_TO_PART3.get(user_input)
+        elif column == _NameIndexColumn.PRINT_NAME:
+            part3 = _PRINT_NAME_TO_PART3.get(user_input)
+        elif column == _NameIndexColumn.INVERTED_NAME:
+            part3 = _INVERTED_NAME_TO_PART3.get(user_input)
         else:
-            raise LanguageNotFoundError(
-                f"{user_input!r} isn't an ISO language code or name"
-            )
-    else:
-        part3 = user_input
+            raise ValueError(f"Invalid column: {column}")
+        if part3 is not None:
+            break
 
-    def query_for_id(table: str) -> sqlite3.Cursor:
-        id_field = "I_Id" if table == "macrolanguages" else "Id"
-        return _query_db(table, id_field, part3)
+    if part3 is None:
+        raise LanguageNotFoundError(
+            f"{user_input!r} isn't an ISO language code or name"
+        )
 
-    from_codes = query_for_id("codes").fetchone()
-    from_name_index = query_for_id("name_index").fetchall()
-    from_macrolanguages = query_for_id("macrolanguages").fetchone()
-    from_retirements = query_for_id("retirements").fetchone()
+    from_codes = _PART3_TO_CODES.get(part3)
+    from_macrolanguages = _PART3_TO_MACROLANGUAGES.get(part3)
+    from_retirements = _PART3_TO_RETIREMENTS.get(part3)
 
-    macrolanguage = from_macrolanguages[0] if from_macrolanguages else None
-    retire_reason = from_retirements[2] if from_retirements else None
-    retire_change_to = from_retirements[3] if from_retirements else None
-    retire_remedy = from_retirements[4] if from_retirements else None
+    ref_name = (
+        from_codes[_CodesColumn.REF_NAME]
+        if from_codes
+        else from_retirements[_RetirementsColumn.REF_NAME]  # type: ignore
+    )
+
+    other_names: Union[List[Name], None] = []
+    for row in _PART3_TO_NAME_INDEX.get(part3, []):
+        p, i = row[_NameIndexColumn.PRINT_NAME], row[_NameIndexColumn.INVERTED_NAME]
+        if not ref_name == p == i:
+            other_names.append(Name(p, i))  # type: ignore
+    other_names = other_names or None
+
+    macrolanguage = (from_macrolanguages or {}).get(_MacrolanguagesColumn.MID)
+    retire_reason = (from_retirements or {}).get(_RetirementsColumn.RET_REASON)
+    retire_change_to = (from_retirements or {}).get(_RetirementsColumn.CHANGE_TO)
+    retire_remedy = (from_retirements or {}).get(_RetirementsColumn.REMEDY)
+
     retire_date = (
-        datetime.datetime.strptime(from_retirements[5], "%Y-%m-%d").date()
+        datetime.datetime.strptime(
+            from_retirements[_RetirementsColumn.EFFECTIVE], "%Y-%m-%d"
+        ).date()
         if from_retirements
         else None
     )
 
     if from_codes:
         # The ISO 639-3 code is active.
-        part2b = from_codes[1]
-        part2t = from_codes[2]
-        part1 = from_codes[3]
-        scope = from_codes[4]
-        type = from_codes[5]
+        part2b = from_codes[_CodesColumn.PART2B]
+        part2t = from_codes[_CodesColumn.PART2T]
+        part1 = from_codes[_CodesColumn.PART1]
+        scope = from_codes[_CodesColumn.SCOPE]
+        type = from_codes[_CodesColumn.TYPE]
         status = "A"
-        ref_name = from_codes[6]
-        comment = from_codes[7]
-        other_names = [
-            Name(print_name, inverted_name)
-            for _, print_name, inverted_name in from_name_index
-            if not (ref_name == print_name == inverted_name)
-        ] or None
+        ref_name = ref_name
+        comment = from_codes[_CodesColumn.COMMENT]
 
     else:
         # The ISO 639-3 code is retired.
@@ -242,34 +276,35 @@ def _get_language(
         scope = "I"
         type = None
         status = "R"
-        ref_name = from_retirements[1]
+        ref_name = ref_name
         comment = None
-        other_names = None
 
     language = Language(
         part3=part3,
-        part2b=part2b,
-        part2t=part2t,
-        part1=part1,
+        part2b=part2b or None,
+        part2t=part2t or None,
+        part1=part1 or None,
         scope=scope,
-        type=type,
+        type=type or None,
         status=status,
         name=ref_name,
-        comment=comment,
-        other_names=other_names,
-        macrolanguage=macrolanguage,
-        retire_reason=retire_reason,
-        retire_change_to=retire_change_to,
-        retire_remedy=retire_remedy,
-        retire_date=retire_date,
+        comment=comment or None,
+        other_names=other_names or None,
+        macrolanguage=macrolanguage or None,
+        retire_reason=retire_reason or None,
+        retire_change_to=retire_change_to or None,
+        retire_remedy=retire_remedy or None,
+        retire_date=retire_date or None,
     )
 
     return language
 
 
 @functools.lru_cache()
-def _get_all_languages() -> List[Language]:
-    return [
-        _get_language(part3)
-        for part3 in [row[0] for row in _DB.execute("SELECT Id FROM codes").fetchall()]
-    ]
+def _get_all_languages() -> Set[Language]:
+    languages = set()
+    for part3 in _PART3_TO_CODES:
+        languages.add(_get_language(part3, (_CodesColumn.ID,)))
+    for part3 in _PART3_TO_RETIREMENTS:
+        languages.add(_get_language(part3, (_RetirementsColumn.ID,)))
+    return languages

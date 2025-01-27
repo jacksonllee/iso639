@@ -31,7 +31,7 @@ the actual import name during runtime is `iso639`
 
 ### Creating `Language` Instances
 
-Create a `Language` instance by one of the methods.
+Create a `Language` instance by one of the class methods.
 
 #### `from_part3`, with an ISO 639-3 code
 
@@ -239,7 +239,7 @@ e.g., [`dataclasses.asdict`](https://docs.python.org/3/library/dataclasses.html#
     ```python
     >>> import iso639
     >>> iso639.DATA_LAST_UPDATED
-    datetime.date(2024, 4, 15)
+    datetime.date(2025, 1, 15)
     ```
 
 * `ALL_LANGUAGES`: The list of all `Language` objects based on the included language code data
@@ -247,11 +247,9 @@ e.g., [`dataclasses.asdict`](https://docs.python.org/3/library/dataclasses.html#
     ```python
     >>> import iso639
     >>> type(iso639.ALL_LANGUAGES)
-    <class 'list'>
+    <class 'set'>
     >>> len(iso639.ALL_LANGUAGES)
-    7920
-    >>> iso639.ALL_LANGUAGES[0]
-    Language(part3='aaa', scope='I', type='L', status='A', name='Ghotuo', ...)
+    8307
     ```
 
 ## Links
@@ -267,9 +265,12 @@ for details.
 
 The data source that backs this package is the
 [language code tables published by SIL](https://iso639-3.sil.org/code_tables/download_tables).
+The tables are included in this package under [`src/iso639/_data/`](src/iso639/_data/).
+They are the UTF8-encoded `*.tab` tab-separated files bundled as a ZIP archive file,
+typically found at a URL that looks like
+`https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3_Code_Tables_YYYYMMDD.zip`
+(replace `YYYYMMDD` with the data release date).
 Note that SIL resources have their [terms of use](https://www.sil.org/terms-use).
-For exactly how the data is included in the package,
-see the script at [`scripts/create_languages_db.py`](scripts/create_languages_db.py).
 
 ## Why Another ISO 639 Package?
 
