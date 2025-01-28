@@ -1,7 +1,7 @@
 import datetime
 from importlib.metadata import version
 
-from .language import Language, LanguageNotFoundError, _get_all_languages
+from .language import ALL_LANGUAGES, Language, LanguageNotFoundError
 
 
 # __version__ is based on calendar versioning (https://calver.org/).
@@ -10,13 +10,6 @@ from .language import Language, LanguageNotFoundError, _get_all_languages
 # __version__ can be bumped for changes other than data updates.
 __version__ = version("python-iso639")
 DATA_LAST_UPDATED = datetime.date(2025, 1, 15)
-
-
-def __getattr__(name):
-    if name == "ALL_LANGUAGES":
-        return _get_all_languages()
-    else:
-        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 
 __all__ = [

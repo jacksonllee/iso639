@@ -3,10 +3,9 @@
 from __future__ import annotations
 
 import datetime
-import functools
 from dataclasses import dataclass
 
-from typing import List, Union, Set, Tuple
+from typing import Dict, List, Union, Set
 
 from ._data import (
     _PART3_TO_CODES,
@@ -101,7 +100,7 @@ class Language:
         return isinstance(other, Language) and self.part3 == other.part3
 
     @classmethod
-    def match(cls, user_input) -> Language:
+    def match(cls, user_input: str, /) -> Language:
         """Return a ``Language`` instance by matching on the user input.
 
         Parameters
@@ -131,7 +130,7 @@ class Language:
         # Order of columns to query the data tables.
         # Bias towards (and therefore prioritize) the user input being
         # a language code rather than a language name.
-        query_order = (
+        query_order: List[_COLUMN_TYPE] = [
             _CodesColumn.ID,
             _CodesColumn.PART2B,
             _CodesColumn.PART2T,
@@ -140,55 +139,55 @@ class Language:
             _CodesColumn.REF_NAME,
             _NameIndexColumn.PRINT_NAME,
             _NameIndexColumn.INVERTED_NAME,
-        )
-        return _get_language(user_input, query_order)
+        ]
+        return _PART3_TO_LANGUAGES[_get_part3(user_input, query_order)]
 
     @classmethod
-    def from_part3(cls, user_input) -> Language:
+    def from_part3(cls, user_input: str, /) -> Language:
         """Return a ``Language`` instance from an ISO 639-3 code."""
-        return _get_language(user_input, (_CodesColumn.ID, _RetirementsColumn.ID))
+        return _PART3_TO_LANGUAGES[
+            _get_part3(user_input, [_CodesColumn.ID, _RetirementsColumn.ID])
+        ]
 
     @classmethod
-    def from_part2b(cls, user_input) -> Language:
+    def from_part2b(cls, user_input: str, /) -> Language:
         """Return a ``Language`` instance from an ISO 639-2 (bibliographic) code."""
-        return _get_language(user_input, (_CodesColumn.PART2B,))
+        return _PART3_TO_LANGUAGES[_get_part3(user_input, [_CodesColumn.PART2B])]
 
     @classmethod
-    def from_part2t(cls, user_input) -> Language:
+    def from_part2t(cls, user_input: str, /) -> Language:
         """Return a ``Language`` instance from an ISO 639-2 (terminological) code."""
-        return _get_language(user_input, (_CodesColumn.PART2T,))
+        return _PART3_TO_LANGUAGES[_get_part3(user_input, [_CodesColumn.PART2T])]
 
     @classmethod
-    def from_part1(cls, user_input) -> Language:
+    def from_part1(cls, user_input: str, /) -> Language:
         """Return a ``Language`` instance from an ISO 639-1 code."""
-        return _get_language(user_input, (_CodesColumn.PART1,))
+        return _PART3_TO_LANGUAGES[_get_part3(user_input, [_CodesColumn.PART1])]
 
     @classmethod
-    def from_name(cls, user_input) -> Language:
+    def from_name(cls, user_input: str, /) -> Language:
         """Return a ``Language`` instance from an ISO 639-3 reference language name."""
-        query_order = (
+        query_order: List[_COLUMN_TYPE] = [
             _CodesColumn.REF_NAME,
             _NameIndexColumn.PRINT_NAME,
             _NameIndexColumn.INVERTED_NAME,
-        )
-        return _get_language(user_input, query_order)
+        ]
+        return _PART3_TO_LANGUAGES[_get_part3(user_input, query_order)]
 
 
-@functools.lru_cache()
-def _get_language(user_input: str, query_order: Tuple[_COLUMN_TYPE]) -> Language:
-    """Create a ``Language`` instance.
+def _get_part3(user_input: str, query_order: List[_COLUMN_TYPE]) -> str:
+    """Get the part 3 code of a language.
 
     Parameters
     ----------
     user_input : str
         The user-provided language code or name.
-    query_order : Tuple[_COLUMN_TYPE]
-        A tuple of columns to specify query order.
-        A tuple but not a list because this argument needs to be hashable for lru_cache.
+    query_order : List[_COLUMN_TYPE]
+        A list of columns to specify query order.
 
     Returns
     -------
-    Language
+    str
 
     Raises
     ------
@@ -227,6 +226,21 @@ def _get_language(user_input: str, query_order: Tuple[_COLUMN_TYPE]) -> Language
             f"{user_input!r} isn't an ISO language code or name"
         )
 
+    return part3
+
+
+def _get_language(part3: str) -> Language:
+    """Create a ``Language`` instance.
+
+    Parameters
+    ----------
+    part3 : str
+        Part 3 code of the language.
+
+    Returns
+    -------
+    Language
+    """
     from_codes = _PART3_TO_CODES.get(part3)
     from_macrolanguages = _PART3_TO_MACROLANGUAGES.get(part3)
     from_retirements = _PART3_TO_RETIREMENTS.get(part3)
@@ -300,11 +314,15 @@ def _get_language(user_input: str, query_order: Tuple[_COLUMN_TYPE]) -> Language
     return language
 
 
-@functools.lru_cache()
-def _get_all_languages() -> Set[Language]:
-    languages = set()
+def _get_all_languages() -> Dict[str, Language]:
+    languages = {}
     for part3 in _PART3_TO_CODES:
-        languages.add(_get_language(part3, (_CodesColumn.ID,)))
+        languages[part3] = _get_language(part3)
     for part3 in _PART3_TO_RETIREMENTS:
-        languages.add(_get_language(part3, (_RetirementsColumn.ID,)))
+        languages[part3] = _get_language(part3)
     return languages
+
+
+_PART3_TO_LANGUAGES: Dict[str, Language] = _get_all_languages()
+
+ALL_LANGUAGES: Set[Language] = set(_PART3_TO_LANGUAGES.values())
