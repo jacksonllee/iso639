@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "python-iso639"
-version = "2025.1.28"
+version = "2025.2.8"
 description = "ISO 639 language codes, names, and other associated information"
 readme = "README.md"
 requires-python = ">= 3.9"
@@ -34,10 +34,10 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = [
-    "black == 24.10.0",
+    "black == 25.1.0",
     "build == 1.2.2",
     "flake8 == 7.1.1",
-    "mypy == 1.14.1",
+    "mypy == 1.15.0",
     "pytest == 8.3.4",
     "requests == 2.32.3",
     "twine == 6.1.0",
@@ -52,7 +52,7 @@ where = [ "src" ]
 [tool.setuptools]
 zip-safe = false
 package-dir = { "" = "src" }
-package-data = { "iso639" = ["_data/*.tab"] }
+package-data = { "iso639" = ["_data/*.tab", "py.typed"] }
 
 [tool.pytest.ini_options]
 addopts = "-vv --durations=0 --strict-markers"

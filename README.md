@@ -10,9 +10,10 @@ other associated information.
 
 Current features:
 
-* A representation of languages mapped across ISO 639-1, 639-2, and 639-3.
-* Functionality to "guess" what a language is for a given
+* 🌐 A representation of languages mapped across ISO 639-1, 639-2, and 639-3.
+* 🔎 Functionality to "guess" what a language is for a given
   unknown language code or name.
+* 🚀 Optimized for speed in retrieving language information.
 
 ## Installation
 
@@ -42,6 +43,15 @@ Create a `Language` instance by one of the class methods.
 <class 'iso639.language.Language'>
 >>> lang1
 Language(part3='fra', part2b='fre', part2t='fra', part1='fr', scope='I', type='L', name='French', comment=None, other_names=None, macrolanguage=None, retire_reason=None, retire_change_to=None, retire_remedy=None, retire_date=None)
+```
+
+Fast object instantiation for retrieving language information (run on Python 3.13, macOS 15.2, Apple M1 Pro)
+
+```python
+In [1]: import iso639
+
+In [2]: %timeit iso639.Language.from_part3("fra")
+220 ns ± 0.658 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
 ```
 
 #### From Another ISO 639 Code Set or a Reference Name

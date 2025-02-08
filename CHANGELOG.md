@@ -17,6 +17,11 @@ major/minor/micro version numbers like `05` (it'd have to be just `5`).
 ### Fixed
 ### Security
 
+## [2025.2.8]
+
+### Added
+* Explcitly indicated that the library is type-annotated.
+
 ## [2025.1.28]
 
 ### Changed
