@@ -5,7 +5,7 @@ from __future__ import annotations
 import datetime
 from dataclasses import dataclass
 
-from typing import Dict, List, Union, Set
+from typing import Dict, List, NoReturn, Optional, Union, Set
 
 from ._data import (
     _PART3_TO_CODES,
@@ -24,6 +24,12 @@ from ._data import (
     _MacrolanguagesColumn,
     _COLUMN_TYPE,
 )
+
+
+_STRING_CLEANING_FUNCS = [
+    lambda x: x.strip().lower(),
+    lambda x: x.strip().title(),
+]
 
 
 class LanguageNotFoundError(Exception):
@@ -100,13 +106,17 @@ class Language:
         return isinstance(other, Language) and self.part3 == other.part3
 
     @classmethod
-    def match(cls, user_input: str, /) -> Language:
+    def match(cls, user_input: str, /, *, exact: bool = False) -> Language:
         """Return a ``Language`` instance by matching on the user input.
 
         Parameters
         ----------
         user_input : str
             A language code or name.
+        exact : bool, optional
+            Whether to enforce exact matching against the user input.
+            Defaults to `False`. If `False`, matching is case-insensitive
+            and ignores leading/trailing whitespace.
 
         Returns
         -------
@@ -140,29 +150,29 @@ class Language:
             _NameIndexColumn.PRINT_NAME,
             _NameIndexColumn.INVERTED_NAME,
         ]
-        return _PART3_TO_LANGUAGES[_get_part3(user_input, query_order)]
+        return _PART3_TO_LANGUAGES[_get_part3(user_input, query_order, exact)]
 
     @classmethod
     def from_part3(cls, user_input: str, /) -> Language:
         """Return a ``Language`` instance from an ISO 639-3 code."""
         return _PART3_TO_LANGUAGES[
-            _get_part3(user_input, [_CodesColumn.ID, _RetirementsColumn.ID])
+            _get_part3_exact(user_input, [_CodesColumn.ID, _RetirementsColumn.ID])
         ]
 
     @classmethod
     def from_part2b(cls, user_input: str, /) -> Language:
         """Return a ``Language`` instance from an ISO 639-2 (bibliographic) code."""
-        return _PART3_TO_LANGUAGES[_get_part3(user_input, [_CodesColumn.PART2B])]
+        return _PART3_TO_LANGUAGES[_get_part3_exact(user_input, [_CodesColumn.PART2B])]
 
     @classmethod
     def from_part2t(cls, user_input: str, /) -> Language:
         """Return a ``Language`` instance from an ISO 639-2 (terminological) code."""
-        return _PART3_TO_LANGUAGES[_get_part3(user_input, [_CodesColumn.PART2T])]
+        return _PART3_TO_LANGUAGES[_get_part3_exact(user_input, [_CodesColumn.PART2T])]
 
     @classmethod
     def from_part1(cls, user_input: str, /) -> Language:
         """Return a ``Language`` instance from an ISO 639-1 code."""
-        return _PART3_TO_LANGUAGES[_get_part3(user_input, [_CodesColumn.PART1])]
+        return _PART3_TO_LANGUAGES[_get_part3_exact(user_input, [_CodesColumn.PART1])]
 
     @classmethod
     def from_name(cls, user_input: str, /) -> Language:
@@ -172,10 +182,16 @@ class Language:
             _NameIndexColumn.PRINT_NAME,
             _NameIndexColumn.INVERTED_NAME,
         ]
-        return _PART3_TO_LANGUAGES[_get_part3(user_input, query_order)]
+        return _PART3_TO_LANGUAGES[_get_part3_exact(user_input, query_order)]
 
 
-def _get_part3(user_input: str, query_order: List[_COLUMN_TYPE]) -> str:
+def _raise_language_not_found_error(user_input: str) -> NoReturn:
+    raise LanguageNotFoundError(f"{user_input!r} isn't an ISO language code or name")
+
+
+def _get_part3(
+    user_input: str, query_order: List[_COLUMN_TYPE], exact: bool = True
+) -> str:
     """Get the part 3 code of a language.
 
     Parameters
@@ -184,6 +200,50 @@ def _get_part3(user_input: str, query_order: List[_COLUMN_TYPE]) -> str:
         The user-provided language code or name.
     query_order : List[_COLUMN_TYPE]
         A list of columns to specify query order.
+    exact : bool, optional
+        Whether to enforce exact matching against the user input. Defaults to `True`.
+        If `False`, basic string cleaning is applied to the user input.
+
+    Returns
+    -------
+    str
+
+    Raises
+    ------
+    LanguageNotFoundError
+        If `part3` isn't a language name or code
+    """
+    try:
+        return _get_part3_exact(user_input, query_order)
+    except LanguageNotFoundError as e:
+        if exact:
+            raise e
+        else:
+            for func in _STRING_CLEANING_FUNCS:
+                try:
+                    return _get_part3_exact(func(user_input), query_order, user_input)
+                except LanguageNotFoundError:
+                    continue
+            else:
+                _raise_language_not_found_error(user_input)
+
+
+def _get_part3_exact(
+    user_input: str,
+    query_order: List[_COLUMN_TYPE],
+    original_user_input: Optional[str] = None,
+) -> str:
+    """Get the part 3 code of a language.
+
+    Parameters
+    ----------
+    user_input : str
+        The user-provided language code or name.
+    query_order : List[_COLUMN_TYPE]
+        A list of columns to specify query order.
+    original_user_input : str, optional
+        The original user input. Default is `None`.
+        This argument is used when the user input has been cleaned.
 
     Returns
     -------
@@ -198,8 +258,7 @@ def _get_part3(user_input: str, query_order: List[_COLUMN_TYPE]) -> str:
     for column in query_order:
         if column == _CodesColumn.ID:
             if user_input in _PART3_TO_CODES:
-                part3 = user_input
-                break
+                return user_input
         elif column == _CodesColumn.PART2B:
             part3 = _PART2B_TO_PART3.get(user_input)
         elif column == _CodesColumn.PART2T:
@@ -208,8 +267,7 @@ def _get_part3(user_input: str, query_order: List[_COLUMN_TYPE]) -> str:
             part3 = _PART1_TO_PART3.get(user_input)
         elif column == _RetirementsColumn.ID:
             if user_input in _PART3_TO_RETIREMENTS:
-                part3 = user_input
-                break
+                return user_input
         elif column == _CodesColumn.REF_NAME:
             part3 = _REF_NAME_TO_PART3.get(user_input)
         elif column == _NameIndexColumn.PRINT_NAME:
@@ -222,9 +280,7 @@ def _get_part3(user_input: str, query_order: List[_COLUMN_TYPE]) -> str:
             break
 
     if part3 is None:
-        raise LanguageNotFoundError(
-            f"{user_input!r} isn't an ISO language code or name"
-        )
+        _raise_language_not_found_error(original_user_input or user_input)
 
     return part3
 

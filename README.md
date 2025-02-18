@@ -45,13 +45,13 @@ Create a `Language` instance by one of the class methods.
 Language(part3='fra', part2b='fre', part2t='fra', part1='fr', scope='I', type='L', name='French', comment=None, other_names=None, macrolanguage=None, retire_reason=None, retire_change_to=None, retire_remedy=None, retire_date=None)
 ```
 
-Fast object instantiation for retrieving language information (run on Python 3.13, macOS 15.2, Apple M1 Pro)
+Fast object instantiation for retrieving language information (run on Python 3.13, macOS 15.3.1, Apple M1 Pro)
 
 ```python
 In [1]: import iso639
 
 In [2]: %timeit iso639.Language.from_part3("fra")
-220 ns ± 0.658 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
+217 ns ± 0.139 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
 ```
 
 #### From Another ISO 639 Code Set or a Reference Name
@@ -116,11 +116,27 @@ Use the `match` classmethod:
 True
 ```
 
+By default, the classmethod `match` supports case-insensitive matching
+and ignores leading/trailing whitespace.
+To enforce exact matching instead, pass in `exact=True`:
+
+```python
+>>> lang5 = iso639.Language.match('FRA')
+>>> lang6 = iso639.Language.match('fra ')
+>>> lang7 = iso639.Language.match('french')
+>>> lang4 == lang5 == lang6 == lang7
+True
+>>> iso639.Language.match("french", exact=True)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+LanguageNotFoundError: 'french' isn't an ISO language code or name
+```
+
 The classmethod `match` is particularly useful for consistently
 accessing a specific attribute from unknown inputs, e.g., the ISO 639-3 code.
 
 ```python
->>> 'fra' == lang1.part3 == lang2.part3 == lang3.part3 == lang4.part3
+>>> 'fra' == lang1.part3 == lang2.part3 == lang3.part3 == lang4.part3 == lang5.part3 == lang6.part3 == lang7.part3
 True
 ```
 
@@ -223,7 +239,6 @@ Beyond that, the precise order in matching is as follows:
 * ISO 639-3 alternative language names (the "print" ones)
 * ISO 639-3 alternative language names (the "inverted" ones)
 
-Only exact matching is done (there's no fuzzy string matching of any sort).
 As soon as a match is found, `Language.match` returns a `Language` instance.
 If there isn't a match, a `LanguageNotFoundError` is raised.
 

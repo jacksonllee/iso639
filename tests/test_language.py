@@ -7,18 +7,34 @@ import pytest
 
 
 @pytest.mark.parametrize(
-    "user_input, expected_part3",
+    "user_input, exact, expected_part3",
     [
-        ("fra", "fra"),
-        ("fre", "fra"),
-        ("fr", "fra"),
-        ("French", "fra"),
-        ("Castilian", "spa"),
+        ("fra", True, "fra"),
+        ("fra", False, "fra"),
+        ("FRA", True, None),
+        ("FRA", False, "fra"),
+        (" FRA  ", False, "fra"),
+        ("Fra", True, None),
+        ("Fra", False, "fra"),
+        (" Fra  ", False, "fra"),
+        ("French", True, "fra"),
+        ("French", False, "fra"),
+        ("FRENCH", True, None),
+        ("FRENCH", False, "fra"),
+        (" FRENCH  ", False, "fra"),
+        ("french", True, None),
+        ("french", False, "fra"),
+        (" french  ", False, "fra"),
+        ("Castilian", True, "spa"),
     ],
 )
-def test_match(user_input, expected_part3):
-    actual_part3 = Language.match(user_input).part3
-    assert actual_part3 == expected_part3
+def test_match(user_input, exact, expected_part3):
+    if expected_part3 is None:
+        with pytest.raises(LanguageNotFoundError):
+            Language.match(user_input, exact=exact)
+    else:
+        actual_part3 = Language.match(user_input, exact=exact).part3
+        assert actual_part3 == expected_part3
 
 
 def test_name():
