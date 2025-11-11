@@ -29,6 +29,8 @@ major/minor/micro version numbers like `05` (it'd have to be just `5`).
   defaulting to `True`.
 
 ### Removed
+* In `Language.match`, removed the keyword argument `exact`
+  (replaced by `strict_case`, defaulting to `True`).
 * Dropped support for Python 3.9.
 
 ## [2025.2.18]
