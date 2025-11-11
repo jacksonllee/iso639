@@ -116,21 +116,25 @@ Use the `match` classmethod:
 True
 ```
 
-By default, the classmethod `match` supports case-insensitive matching
-and ignores leading/trailing whitespace.
-To enforce exact matching instead, pass in `exact=True`:
+By default, the classmethod `match` is case-sensitive.
+To ignore case in matching instead, pass in `strict_case=False`:
 
 ```python
->>> lang5 = iso639.Language.match('FRA')
->>> lang6 = iso639.Language.match('fra ')
->>> lang7 = iso639.Language.match('french')
->>> lang4 == lang5 == lang6 == lang7
+>>> lang5 = iso639.Language.match('FRA', strict_case=False)
+>>> lang6 = iso639.Language.match('french', strict_case=False)
+>>> lang4 == lang5 == lang6
 True
->>> iso639.Language.match("french", exact=True)
+>>> iso639.Language.match("french")
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 LanguageNotFoundError: 'french' isn't an ISO language code or name
 ```
+
+> [!NOTE]  
+> Depending on your use case, ignoring case could potentially lead to matching issues,
+  where a language code might match a language name (or vice versa) that you didn't intend,
+  e.g., conflating "igo" and "Igo", while there exist the ISO 639-3 code `ahl` for Igo and
+  the ISO 639-3 code `igo` for Isebe. 
 
 The classmethod `match` is particularly useful for consistently
 accessing a specific attribute from unknown inputs, e.g., the ISO 639-3 code.
