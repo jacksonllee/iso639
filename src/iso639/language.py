@@ -26,10 +26,7 @@ from ._data import (
 )
 
 
-_STRING_CLEANING_FUNCS = [
-    lambda x: x.strip().lower(),
-    lambda x: x.strip().title(),
-]
+_STRING_CLEANING_FUNCS = [lambda x: x.lower(), lambda x: x.title()]
 
 
 class LanguageNotFoundError(Exception):
@@ -101,17 +98,19 @@ class Language:
         return isinstance(other, Language) and self.part3 == other.part3
 
     @classmethod
-    def match(cls, user_input: str, /, *, exact: bool = False) -> Language:
+    def match(cls, user_input: str, /, *, strict_case: bool = True) -> Language:
         """Return a ``Language`` instance by matching on the user input.
 
         Parameters
         ----------
         user_input : str
             A language code or name.
-        exact : bool, optional
-            Whether to enforce exact matching against the user input.
-            Defaults to `False`. If `False`, matching is case-insensitive
-            and ignores leading/trailing whitespace.
+        strict_case : bool, optional
+            Defaults to ``True``, for enforcing strict case sensitivity.
+            If ``False`` and if ``user_input`` doesn't find a match,
+            further match attempts will be made with the all-lowercase version of
+            ``user_input`` (``"foobar"``) and the title-case version of ``user_input``
+            (``"Foobar"``).
 
         Returns
         -------
@@ -145,7 +144,7 @@ class Language:
             _NameIndexColumn.PRINT_NAME,
             _NameIndexColumn.INVERTED_NAME,
         ]
-        return _PART3_TO_LANGUAGES[_get_part3(user_input, query_order, exact)]
+        return _PART3_TO_LANGUAGES[_get_part3(user_input, query_order, strict_case)]
 
     @classmethod
     def from_part3(cls, user_input: str, /) -> Language:
@@ -185,7 +184,7 @@ def _raise_language_not_found_error(user_input: str) -> NoReturn:
 
 
 def _get_part3(
-    user_input: str, query_order: list[_COLUMN_TYPE], exact: bool = True
+    user_input: str, query_order: list[_COLUMN_TYPE], strict_case: bool = True
 ) -> str:
     """Get the part 3 code of a language.
 
@@ -195,9 +194,12 @@ def _get_part3(
         The user-provided language code or name.
     query_order : List[_COLUMN_TYPE]
         A list of columns to specify query order.
-    exact : bool, optional
-        Whether to enforce exact matching against the user input. Defaults to `True`.
-        If `False`, basic string cleaning is applied to the user input.
+    strict_case : bool, optional
+        Defaults to ``True``, for enforcing strict case sensitivity.
+        If ``False`` and if ``user_input`` doesn't find a match,
+        further match attempts will be made with the all-lowercase version of
+        ``user_input`` (``"foobar"``) and the title-case version of ``user_input``
+        (``"Foobar"``).
 
     Returns
     -------
@@ -211,7 +213,7 @@ def _get_part3(
     try:
         return _get_part3_exact(user_input, query_order)
     except LanguageNotFoundError as e:
-        if exact:
+        if strict_case:
             raise e
         else:
             for func in _STRING_CLEANING_FUNCS:
@@ -234,7 +236,7 @@ def _get_part3_exact(
     ----------
     user_input : str
         The user-provided language code or name.
-    query_order : List[_COLUMN_TYPE]
+    query_order : list[_COLUMN_TYPE]
         A list of columns to specify query order.
     original_user_input : str, optional
         The original user input. Default is `None`.
@@ -249,6 +251,7 @@ def _get_part3_exact(
     LanguageNotFoundError
         If `part3` isn't a language name or code
     """
+    user_input = user_input.strip()
     part3: str | None = None
     for column in query_order:
         if column == _CodesColumn.ID:

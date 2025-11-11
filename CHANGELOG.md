@@ -24,6 +24,9 @@ major/minor/micro version numbers like `05` (it'd have to be just `5`).
 
 ### Changed
 * Updated the ISO 639 data from SIL to the latest 2025-10-15 release.
+* Case-insensitive matching for `Language.match` is now opt-in.
+  The keyword argument has been renamed `strict_case` (from `exact` before),
+  defaulting to `True`.
 
 ### Removed
 * Dropped support for Python 3.9.

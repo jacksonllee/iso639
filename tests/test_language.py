@@ -7,9 +7,10 @@ import pytest
 
 
 @pytest.mark.parametrize(
-    "user_input, exact, expected_part3",
+    "user_input, strict_case, expected_part3",
     [
         ("fra", True, "fra"),
+        (" fra  ", True, "fra"),
         ("fra", False, "fra"),
         ("FRA", True, None),
         ("FRA", False, "fra"),
@@ -28,12 +29,38 @@ import pytest
         ("Castilian", True, "spa"),
     ],
 )
-def test_match(user_input, exact, expected_part3):
+def test_match(user_input, strict_case, expected_part3):
     if expected_part3 is None:
         with pytest.raises(LanguageNotFoundError):
-            Language.match(user_input, exact=exact)
+            Language.match(user_input, strict_case=strict_case)
     else:
-        actual_part3 = Language.match(user_input, exact=exact).part3
+        actual_part3 = Language.match(user_input, strict_case=strict_case).part3
+        assert actual_part3 == expected_part3
+
+
+@pytest.mark.parametrize(
+    "user_input, expected_part3",
+    [
+        ("fra", "fra"),
+        (" fra  ", "fra"),
+        ("FRA", None),
+        (" FRA  ", None),
+        ("Fra", None),
+        (" Fra  ", None),
+        ("French", "fra"),
+        ("FRENCH", None),
+        (" FRENCH  ", None),
+        ("french", None),
+        (" french  ", None),
+        ("Castilian", "spa"),
+    ],
+)
+def test_match_no_strict_case_kwarg(user_input, expected_part3):
+    if expected_part3 is None:
+        with pytest.raises(LanguageNotFoundError):
+            Language.match(user_input)
+    else:
+        actual_part3 = Language.match(user_input).part3
         assert actual_part3 == expected_part3
 
 
