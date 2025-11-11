@@ -1297,7 +1297,7 @@ cli				I	L	Chakali
 clj				I	L	Laitu Chin	
 clk				I	L	Idu-Mishmi	
 cll				I	L	Chala	
-clm				I	L	Clallam	
+clm				I	L	Klallam	
 clo				I	L	Lowland Oaxaca Chontal	
 cls				I	H	Classical Sanskrit	
 clt				I	L	Lautu Chin	
@@ -2325,7 +2325,7 @@ gyz				I	L	Geji
 gza				I	L	Ganza	
 gzi				I	L	Gazi	
 gzn				I	L	Gane	
-haa				I	L	Han	
+haa				I	L	Hän	
 hab				I	L	Hanoi Sign Language	
 hac				I	L	Gurani	
 had				I	L	Hatam	
@@ -2892,7 +2892,7 @@ kce				I	L	Kaivi
 kcf				I	L	Ukaan	
 kcg				I	L	Tyap	
 kch				I	L	Vono	
-kci				I	L	Kamantan	
+kci				I	L	Ngyian	
 kcj				I	L	Kobiana	
 kck				I	L	Kalanga	
 kcl				I	L	Kela (Papua New Guinea)	
@@ -3390,7 +3390,7 @@ kwg				I	L	Sara Kaba Deme
 kwh				I	L	Kowiai	
 kwi				I	L	Awa-Cuaiquer	
 kwj				I	L	Kwanga	
-kwk				I	L	Kwakiutl	
+kwk				I	L	Kwak'wala	
 kwl				I	L	Kofyar	
 kwm				I	L	Kwambi	
 kwn				I	L	Kwangali	
@@ -3795,7 +3795,7 @@ lup				I	L	Lumbu
 luq				I	L	Lucumi	
 lur				I	L	Laura	
 lus	lus	lus		I	L	Lushai	
-lut				I	L	Lushootseed	
+lut				I	E	Lushootseed	
 luu				I	L	Lumba-Yakkha	
 luv				I	L	Luwati	
 luw				I	L	Luo (Cameroon)	
@@ -4011,7 +4011,7 @@ mhj				I	L	Mogholi
 mhk				I	L	Mungaka	
 mhl				I	L	Mauwake	
 mhm				I	L	Makhuwa-Moniga	
-mhn				I	L	Mócheno	
+mhn				I	L	Mòcheno	
 mho				I	L	Mashi (Zambia)	
 mhp				I	L	Balinese Malay	
 mhq				I	L	Mandan	
@@ -4574,7 +4574,7 @@ nes				I	L	Bhoti Kinnauri
 net				I	L	Nete	
 neu				I	C	Neo	
 nev				I	L	Nyaheun	
-new	new	new		I	L	Newari	
+new	new	new		I	L	Nepal Bhasa	
 nex				I	L	Neme	
 ney				I	L	Neyo	
 nez				I	L	Nez Perce	
@@ -4916,7 +4916,7 @@ nxo				I	L	Ndambomo
 nxq				I	L	Naxi	
 nxr				I	L	Ninggerum	
 nxx				I	L	Nafri	
-nya	nya	nya	ny	I	L	Nyanja	
+nya	nya	nya	ny	I	L	Chichewa	
 nyb				I	L	Nyangbo	
 nyc				I	L	Nyanga-li	
 nyd				I	L	Nyore	
@@ -4954,6 +4954,7 @@ nzy				I	L	Nzakambay
 nzz				I	L	Nanga Dama Dogon	
 oaa				I	L	Orok	
 oac				I	L	Oroch	
+oak				I	L	Noakhali	
 oar				I	H	Old Aramaic (up to 700 BCE)	
 oav				I	H	Old Avar	
 obi				I	E	Obispeño	
@@ -5017,6 +5018,7 @@ okv				I	L	Orokaiva
 okx				I	L	Okpe (Northwestern Edo)	
 okz				I	H	Old Khmer	
 ola				I	L	Walungge	
+olb				I	L	Oli-Bodiman	
 old				I	L	Mochi	
 ole				I	L	Olekha	
 olk				I	E	Olkol	
@@ -5088,11 +5090,12 @@ ory				I	L	Odia
 orz				I	L	Ormu	
 osa	osa	osa		I	L	Osage	
 osc				I	H	Oscan	
+osd				I	L	Digor Ossetic	
 osi				I	L	Osing	
 osn				I	H	Old Sundanese	
 oso				I	L	Ososo	
 osp				I	H	Old Spanish	
-oss	oss	oss	os	I	L	Ossetian	
+oss	oss	oss	os	I	L	Iron Ossetic	
 ost				I	L	Osatu	
 osu				I	L	Southern One	
 osx				I	H	Old Saxon	
@@ -5758,6 +5761,7 @@ scu				I	L	Shumcho
 scv				I	L	Sheni	
 scw				I	L	Sha	
 scx				I	H	Sicel	
+scz				I	L	Shaetlan	
 sda				I	L	Toraja-Sa'dan	
 sdb				I	L	Shabak	
 sdc				I	L	Sassarese Sardinian	
@@ -7651,7 +7655,6 @@ yob				I	E	Yoba
 yog				I	L	Yogad	
 yoi				I	L	Yonaguni	
 yok				I	L	Yokuts	
-yol				I	E	Yola	
 yom				I	L	Yombe	
 yon				I	L	Yongkom	
 yor	yor	yor	yo	I	L	Yoruba	
@@ -7833,7 +7836,7 @@ zml				I	E	Matngala
 zmm				I	L	Marimanindji	
 zmn				I	L	Mbangwe	
 zmo				I	L	Molo	
-zmp				I	L	Mpuono	
+zmp				I	L	Mbuun	
 zmq				I	L	Mituku	
 zmr				I	L	Maranunggu	
 zms				I	L	Mbesa	
