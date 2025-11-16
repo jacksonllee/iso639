@@ -117,7 +117,7 @@ True
 ```
 
 By default, the classmethod `match` is case-sensitive.
-To ignore case in matching instead, pass in `strict_case=False`:
+To ignore case instead, pass in `strict_case=False`:
 
 ```python
 >>> lang5 = iso639.Language.match('FRA', strict_case=False)
@@ -132,7 +132,7 @@ LanguageNotFoundError: 'french' isn't an ISO language code or name
 
 > [!NOTE]  
 > Depending on your use case, ignoring case could potentially lead to matching issues,
-  where a language code might match a language name (or vice versa) that you didn't intend,
+  where a language code might match an unintended language name (or vice versa),
   e.g., conflating "igo" and "Igo", while there exist the ISO 639-3 code `ahl` for Igo and
   the ISO 639-3 code `igo` for Isebe. 
 

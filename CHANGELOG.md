@@ -17,6 +17,12 @@ major/minor/micro version numbers like `05` (it'd have to be just `5`).
 ### Fixed
 ### Security
 
+## [2025.11.16]
+
+### Fixed
+* Fixed README.md (shown on the PyPI page) for the change from `exact` to `strict_case`
+  in `Language.match`.
+
 ## [2025.11.11]
 
 ### Added
