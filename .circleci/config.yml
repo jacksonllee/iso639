@@ -9,11 +9,20 @@ jobs:
     parameters:
       command-run:
         type: string
+      latest-supported-python-version:
+        type: string
+        # Pick the highest Python 3.x version that this package is known to support
+        default: "3.14"
     docker:
-      # Pick the highest Python 3.x version that this package is known to support
-      - image: cimg/python:3.14
+      - image: cimg/python:<< parameters.latest-supported-python-version >>
     steps:
       - checkout
+      - run:
+          name: Set up uv virtual environment
+          command: |
+            uv python install << parameters.latest-supported-python-version >>
+            uv venv .venv --managed-python --python=python<< parameters.latest-supported-python-version >>
+            source .venv/bin/activate
       - run:
           command: << parameters.command-run >>
 
@@ -26,22 +35,37 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Python under uv
+          command: |
+            uv python install << parameters.python-version >>
+      - run:
           # Test that we can build a source distribution that can correctly
           # install from clean slate.
           # "python -m build" creates
           # dist/<pkg-name>-x.y.z.tar.gz and dist/<pkg-name>-x.y.z-py3-none-any.whl
-          name: Build source distribution and install package from it
+          name: Build source distribution, test installing package from it, and clean up
           command: |
-              pip install ".[dev]" && \
-              python -m build && \
-              pip install dist/`ls dist/ | grep .whl`
+              uv venv .venv --managed-python --python=python<< parameters.python-version >>
+              source .venv/bin/activate
+              uv pip install --no-progress --upgrade pip setuptools build
+              uv run python -m build
+              uv pip install dist/`ls dist/ | grep .whl`
+              deactivate
+              rm -rf .venv
+      - run:
+          name: Set up uv virtual environment for the test suite
+          command: |
+            uv venv .venv --managed-python --python=python<< parameters.python-version >>
+            source .venv/bin/activate
+            uv pip install --no-progress -e ".[dev]"
       - run:
           name: Show installed Python packages
-          command: pip list -v
+          command: |
+            uv pip list -v
       - run:
           name: Run python tests
           command: |
-              pytest -vv --durations=0 --junitxml=/tmp/testxml/report.xml
+            uv run pytest --junitxml=/tmp/testxml/report.xml --durations=0
       - store_test_results:
           path: /tmp/testxml/
 
@@ -57,8 +81,9 @@ jobs:
           shell: bash.exe
           command: |
             python --version && \
-            pip install ".[dev]" && \
-            pip list && \
+            python.exe -m pip install --upgrade pip setuptools wheel && \
+            python.exe -m pip install ".[dev]" && \
+            python.exe -m pip list && \
             pytest
 
 workflows:
@@ -68,47 +93,47 @@ workflows:
       - pre-build:
           name: flake8
           command-run: |
-            pip install ".[dev]" && \
-            flake8 src tests
+            uv pip install --no-progress -e ".[dev]" && \
+            uv run flake8 src tests
       - pre-build:
           name: black
-          command-run:  |
-            pip install ".[dev]" && \
-            black --check src tests
+          command-run: |
+            uv pip install --no-progress -e ".[dev]" && \
+            uv run black --check src tests
       - pre-build:
           name: mypy
-          command-run:  |
-            pip install ".[dev]" && \
-            mypy src
+          command-run: |
+            uv pip install --no-progress -e ".[dev]" && \
+            uv run mypy src
       - pre-build:
           name: twine
           command-run: |
-            pip install ".[dev]" && \
-            python -m build && \
-            twine check dist/`ls dist/ | grep .tar.gz` && \
-            twine check dist/`ls dist/ | grep .whl`
-      - pre-build:
-          name: safety
-          # jinja2 v3.1.4 triggers https://data.safetycli.com/v/70612/97c
-          command-run: |
-            pip install -e . && \
-            pip install --upgrade safety && \
-            safety --version && \
-            pip freeze | safety check --stdin --ignore=70612
+            uv pip install --no-progress -e ".[dev]" && \
+            uv run python -m build && \
+            uv run twine check dist/`ls dist/ | grep .tar.gz` && \
+            uv run twine check dist/`ls dist/ | grep .whl`
       - pre-build:
           name: bandit
           command-run: |
-            pip install --upgrade bandit && \
-            bandit --version && \
-            bandit -r src -x tests
+            uv pip install --no-progress -e "." && \
+            uv pip install --no-progress --upgrade bandit && \
+            uv run bandit --version && \
+            uv run bandit -r src -x tests
+      - pre-build:
+          name: pip-audit
+          command-run: |
+            uv pip install --no-progress -e "." && \
+            uv pip install --no-progress --upgrade pip-audit && \
+            uv run pip-audit --version && \
+            uv run pip-audit --skip-editable
       - build-python:
           requires:
             - flake8
             - black
             - mypy
             - twine
-            - safety
             - bandit
+            - pip-audit
           matrix:
             parameters:
               python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
@@ -118,5 +143,5 @@ workflows:
             - black
             - mypy
             - twine
-            - safety
             - bandit
+            - pip-audit

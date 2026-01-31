@@ -209,7 +209,7 @@ A `Language` instance has the following attributes:
 | `status`           | `str`           | ✗                 | One of {(A)ctive, (R)etired}, describing the ISO 639-3 code                                                           |
 | `name`             | `str`           | ✗                 | Reference language name in ISO 639-3                                                                                  |
 | `comment`          | `str`           | ✓                 | Comment from ISO 639-3                                                                                                |
-| `other_names`      | `List[Name]`    | ✓                 | Other print and inverted names [2]                                                                                    |
+| `other_names`      | `list[Name]`    | ✓                 | Other print and inverted names [2]                                                                                    |
 | `macrolanguage`    | `str`           | ✓                 | Macrolanguage                                                                                                         |
 | `retire_reason`    | `str`           | ✓                 | Retirement reason, one of {(C)hange, (D)uplicate, (N)on-existent, (S)plit, (M)erge}                                   |
 | `retire_change_to` | `str`           | ✓                 | ISO 639-3 code to which this language can be changed, if retirement reason is one of {(C)hange, (D)uplicate, (M)erge} |
@@ -268,7 +268,7 @@ e.g., [`dataclasses.asdict`](https://docs.python.org/3/library/dataclasses.html#
     ```python
     >>> import iso639
     >>> iso639.DATA_LAST_UPDATED
-    datetime.date(2025, 10, 15)
+    datetime.date(2026, 1, 15)
     ```
 
 * `ALL_LANGUAGES`: The list of all `Language` objects based on the included language code data
@@ -278,7 +278,7 @@ e.g., [`dataclasses.asdict`](https://docs.python.org/3/library/dataclasses.html#
     >>> type(iso639.ALL_LANGUAGES)
     <class 'set'>
     >>> len(iso639.ALL_LANGUAGES)
-    8311
+    8313
     ```
 
 ## Links

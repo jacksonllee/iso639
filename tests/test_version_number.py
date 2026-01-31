@@ -3,7 +3,6 @@ import re
 
 import iso639
 
-
 _REPO_DIR = os.path.dirname(os.path.dirname(__file__))
 
 

@@ -132,7 +132,7 @@ def test_invalid_inputs():
 
 
 def test_data_last_updated():
-    assert DATA_LAST_UPDATED == datetime.date(2025, 10, 15), "Need to update README.md"
+    assert DATA_LAST_UPDATED == datetime.date(2026, 1, 15), "Need to update README.md"
 
 
 def test_all_languages():
@@ -140,7 +140,7 @@ def test_all_languages():
     # Defining `len_all_languages` so that when the assertion fails,
     # the error message is more informative.
     len_all_languages = len(ALL_LANGUAGES)
-    assert len_all_languages == 8311, "Need to update README.md"
+    assert len_all_languages == 8313, "Need to update README.md"
     lang = list(ALL_LANGUAGES)[0]
     assert type(lang) is Language
 

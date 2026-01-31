@@ -850,7 +850,7 @@ bnz				I	L	Beezen
 boa				I	L	Bora	
 bob				I	L	Aweer	
 bod	tib	bod	bo	I	L	Tibetan	
-boe				I	L	Mundabli	
+boe				I	L	Mundabli-Mufu	
 bof				I	L	Bolon	
 bog				I	L	Bamako Sign Language	
 boh				I	L	Boma	
@@ -1751,6 +1751,7 @@ dyb				I	E	Dyaberdyaber
 dyd				I	E	Dyugun	
 dyg				I	E	Villa Viciosa Agta	
 dyi				I	L	Djimini Senoufo	
+dyl				I	L	Bhutanese Sign Language	
 dym				I	L	Yanda Dom Dogon	
 dyn				I	L	Dyangadi	
 dyo				I	L	Jola-Fonyi	
@@ -3573,6 +3574,7 @@ lex				I	L	Luang
 ley				I	L	Lemolang	
 lez	lez	lez		I	L	Lezghian	
 lfa				I	L	Lefa	
+lfb				I	L	Buu (Cameroon)	
 lfn				I	C	Lingua Franca Nova	
 lga				I	L	Lungga	
 lgb				I	L	Laghu	
@@ -3784,7 +3786,7 @@ lue				I	L	Luvale
 luf				I	L	Laua	
 lug	lug	lug	lg	I	L	Ganda	
 luh				I	L	Leizhou Chinese	
-lui	lui	lui		I	E	Luiseno	
+lui	lui	lui		I	E	Luiseño	
 luj				I	L	Luna	
 luk				I	L	Lunanakha	
 lul				I	L	Olu'bo	

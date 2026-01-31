@@ -17,6 +17,11 @@ major/minor/micro version numbers like `05` (it'd have to be just `5`).
 ### Fixed
 ### Security
 
+## [2026.1.31]
+
+### Changed
+* Updated the ISO 639 data from SIL to the latest 2026-01-15 release.
+
 ## [2025.11.16]
 
 ### Fixed

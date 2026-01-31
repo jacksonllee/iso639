@@ -25,7 +25,6 @@ from ._data import (
     _COLUMN_TYPE,
 )
 
-
 _STRING_CLEANING_FUNCS = [lambda x: x.lower(), lambda x: x.title()]
 
 
@@ -33,40 +32,17 @@ class LanguageNotFoundError(Exception):
     pass
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Name:
     """Represents an alternative name of a language."""
 
-    __slots__ = ("print", "inverted")
     print: str
     inverted: str
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Language:
     """Represents a language in the ISO 639-3 charts."""
-
-    __slots__ = (
-        # From the "codes" table
-        "part3",
-        "part2b",
-        "part2t",
-        "part1",
-        "scope",
-        "type",
-        "status",
-        "name",
-        "comment",
-        # From the "name_index" table
-        "other_names",
-        # From the "macrolanguages" table
-        "macrolanguage",
-        # From the "retirements" table
-        "retire_reason",
-        "retire_change_to",
-        "retire_remedy",
-        "retire_date",
-    )
 
     # From the "codes" table
     part3: str
