@@ -17,8 +17,16 @@ Current features:
 
 ## Installation
 
+Using pip:
+
 ```bash
 pip install python-iso639
+```
+
+Using conda:
+
+```bash
+conda install -c conda-forge python-iso639
 ```
 
 ## Usage
