@@ -8,7 +8,7 @@ from .language import ALL_LANGUAGES, Language, LanguageNotFoundError
 # While DATA_LAST_UPDATED is strictly the date for the ISO 639-3 data release,
 # __version__ can be bumped for changes other than data updates.
 __version__ = version("python-iso639")
-DATA_LAST_UPDATED = datetime.date(2026, 1, 15)
+DATA_LAST_UPDATED = datetime.date(2026, 4, 15)
 
 
 __all__ = [

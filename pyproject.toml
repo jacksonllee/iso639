@@ -1,14 +1,14 @@
 [build-system]
-requires = ["setuptools >= 65.3.0", "wheel"]
+requires = ["setuptools >= 77.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "python-iso639"
-version = "2026.1.31"
+version = "2026.4.20"
 description = "ISO 639 language codes, names, and other associated information"
 readme = "README.md"
 requires-python = ">= 3.10"
-license = { text = "Apache 2.0" }
+license = "Apache-2.0"
 authors = [ { name = "Jackson L. Lee", email = "jacksonlunlee@gmail.com" } ]
 keywords = ["ISO 639", "language codes", "languages", "linguistics"]
 classifiers = [
@@ -17,7 +17,6 @@ classifiers = [
     "Intended Audience :: Education",
     "Intended Audience :: Information Technology",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
@@ -34,12 +33,12 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = [
-    "black == 26.1.0",
-    "build == 1.4.0",
-    "flake8 == 7.3.0",
-    "mypy == 1.19.1",
-    "pytest == 9.0.2",
-    "twine == 6.2.0",
+    "black",
+    "build",
+    "flake8",
+    "mypy",
+    "pytest",
+    "twine",
 ]
 
 [project.urls]
