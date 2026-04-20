@@ -23,6 +23,12 @@ Using pip:
 pip install python-iso639
 ```
 
+Using uv:
+
+```bash
+uv add python-iso639
+```
+
 Using conda:
 
 ```bash
