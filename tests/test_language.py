@@ -132,7 +132,7 @@ def test_invalid_inputs():
 
 
 def test_data_last_updated():
-    assert DATA_LAST_UPDATED == datetime.date(2026, 4, 15), "Need to update README.md"
+    assert DATA_LAST_UPDATED == datetime.date(2026, 7, 15), "Need to update README.md"
 
 
 def test_all_languages():

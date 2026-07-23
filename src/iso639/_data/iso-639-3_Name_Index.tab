@@ -1260,7 +1260,7 @@ cek	Eastern Khumi Chin	Chin, Eastern Khumi
 cen	Cen	Cen
 ces	Czech	Czech
 cet	Centúúm	Centúúm
-cey	Ekai Chin	Chin, Ekai
+cey	Laoktu Chin	Chin, Laoktu
 cfa	Dijim-Bwilim	Dijim-Bwilim
 cfd	Cara	Cara
 cfg	Como Karim	Como Karim
@@ -4208,7 +4208,8 @@ mgl	Maleu-Kilenge	Maleu-Kilenge
 mgm	Mambae	Mambae
 mgn	Mbangi	Mbangi
 mgo	Meta'	Meta'
-mgp	Eastern Magar	Magar, Eastern
+mgp	Magar	Magar
+mgp	Magar Dhut	Magar Dhut
 mgq	Malila	Malila
 mgr	Mambwe-Lungu	Mambwe-Lungu
 mgs	Manda (Tanzania)	Manda (Tanzania)
@@ -4480,11 +4481,11 @@ mqz	Pano	Pano
 mra	Mlabri	Mlabri
 mrb	Marino	Marino
 mrc	Maricopa	Maricopa
-mrd	Western Magar	Magar, Western
 mre	Martha's Vineyard Sign Language	Martha's Vineyard Sign Language
 mrf	Elseng	Elseng
 mrg	Mising	Mising
-mrh	Mara Chin	Chin, Mara
+mrh	Mara	Mara
+mrh	Shendu	Shendu
 mri	Maori	Maori
 mrj	Western Mari	Mari, Western
 mrk	Hmwaveke	Hmwaveke
@@ -6063,6 +6064,7 @@ sco	Scots	Scots
 scp	Helambu Sherpa	Helambu Sherpa
 scp	Hyolmo	Hyolmo
 scq	Sa'och	Sa'och
+scs	Dene Kedé	Dene Kedé
 scs	North Slavey	Slavey, North
 sct	Southern Katang	Katang, Southern
 scu	Shumcho	Shumcho
@@ -6151,7 +6153,6 @@ shh	Shoshoni	Shoshoni
 shi	Tachelhit	Tachelhit
 shj	Shatt	Shatt
 shk	Shilluk	Shilluk
-shl	Shendu	Shendu
 shm	Shahrudi	Shahrudi
 shn	Shan	Shan
 sho	Shanga	Shanga
@@ -6591,6 +6592,7 @@ tca	Ticuna	Ticuna
 tcb	Tanacross	Tanacross
 tcc	Datooga	Datooga
 tcd	Tafi	Tafi
+tce	Dän K'è	Dän K'è
 tce	Southern Tutchone	Tutchone, Southern
 tcf	Malinaltepec Me'phaa	Me'phaa, Malinaltepec
 tcf	Malinaltepec Tlapanec	Tlapanec, Malinaltepec
@@ -7815,6 +7817,7 @@ xse	Sempan	Sempan
 xsh	Shamang	Shamang
 xsi	Sio	Sio
 xsj	Subi	Subi
+xsl	Dene Zhatié	Dene Zhatié
 xsl	South Slavey	Slavey, South
 xsm	Kasem	Kasem
 xsn	Sanga (Nigeria)	Sanga (Nigeria)
