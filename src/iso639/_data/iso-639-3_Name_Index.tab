@@ -28,6 +28,7 @@ abd	Manide	Manide
 abe	Western Abnaki	Abnaki, Western
 abf	Abai Sungai	Abai Sungai
 abg	Abaga	Abaga
+abg	Wagama	Wagama
 abh	Tajiki Arabic	Arabic, Tajiki
 abi	Abidji	Abidji
 abj	Aka-Bea	Aka-Bea
@@ -402,7 +403,6 @@ ast	Bable	Bable
 ast	Leonese	Leonese
 asu	Tocantins Asurini	Asurini, Tocantins
 asv	Asoa	Asoa
-asw	Australian Aborigines Sign Language	Australian Aborigines Sign Language
 asx	Muratayak	Muratayak
 asy	Yaosakor Asmat	Asmat, Yaosakor
 asz	As	As
@@ -411,6 +411,7 @@ atb	Zaiwa	Zaiwa
 atc	Atsahuaca	Atsahuaca
 atd	Ata Manobo	Manobo, Ata
 ate	Atemble	Atemble
+ate	Mand	Mand
 atg	Ivbie North-Okpela-Arhe	Ivbie North-Okpela-Arhe
 ati	Attié	Attié
 atj	Atikamekw	Atikamekw
@@ -1502,6 +1503,7 @@ cuh	Chuka	Chuka
 cuh	Gichuka	Gichuka
 cui	Cuiba	Cuiba
 cuj	Mashco Piro	Mashco Piro
+cuk	San Blas Guna	Guna, San Blas
 cuk	San Blas Kuna	Kuna, San Blas
 cul	Culina	Culina
 cul	Kulina	Kulina
@@ -1612,6 +1614,7 @@ dgb	Bunoge Dogon	Dogon, Bunoge
 dgc	Casiguran Dumagat Agta	Agta, Casiguran Dumagat
 dgd	Dagaari Dioula	Dagaari Dioula
 dge	Degenan	Degenan
+dge	Degenang	Degenang
 dgg	Doga	Doga
 dgh	Dghwede	Dghwede
 dgi	Northern Dagara	Dagara, Northern
@@ -2023,6 +2026,7 @@ fir	Firan	Firan
 fit	Meänkieli	Meänkieli
 fit	Tornedalen Finnish	Finnish, Tornedalen
 fiw	Fiwaga	Fiwaga
+fjs	Fiji Sign Language	Fiji Sign Language
 fkk	Kirya-Konzəl	Kirya-Konzəl
 fkv	Kven Finnish	Finnish, Kven
 fla	Kalispel-Pend d'Oreille	Kalispel-Pend d'Oreille
@@ -2733,6 +2737,7 @@ ikr	Ikaranggal	Ikaranggal
 iks	Inuit Sign Language	Inuit Sign Language
 ikt	Inuinnaqtun	Inuinnaqtun
 ikt	Western Canadian Inuktitut	Inuktitut, Western Canadian
+iku	Canadian Inuktut	Inuktut, Canadian
 iku	Inuktitut	Inuktitut
 ikv	Iku-Gora-Ankwa	Iku-Gora-Ankwa
 ikw	Ikwere	Ikwere
@@ -3379,6 +3384,7 @@ kou	Koke	Koke
 kov	Kudu-Camo	Kudu-Camo
 kow	Kugama	Kugama
 koy	Koyukon	Koyukon
+koz	Amako	Amako
 koz	Korak	Korak
 kpa	Kutto	Kutto
 kpb	Mullu Kurumba	Kurumba, Mullu
@@ -3900,6 +3906,7 @@ lni	Daantanai'	Daantanai'
 lnj	Leningitij	Leningitij
 lnl	South Central Banda	Banda, South Central
 lnm	Langam	Langam
+lnm	Pondi	Pondi
 lnn	Lorediakarkar	Lorediakarkar
 lns	Lamnso'	Lamnso'
 lnu	Longuda	Longuda
@@ -4213,7 +4220,8 @@ mgp	Magar Dhut	Magar Dhut
 mgq	Malila	Malila
 mgr	Mambwe-Lungu	Mambwe-Lungu
 mgs	Manda (Tanzania)	Manda (Tanzania)
-mgt	Mongol	Mongol
+mgt	Mongol (Papua New Guinea)	Mongol (Papua New Guinea)
+mgt	Mwakai	Mwakai
 mgu	Mailu	Mailu
 mgv	Matengo	Matengo
 mgw	Matumbi	Matumbi
@@ -4711,6 +4719,8 @@ nak	Nakanai	Nakanai
 nal	Nalik	Nalik
 nam	Ngan'gityemerri	Ngan'gityemerri
 nan	Min Nan Chinese	Chinese, Min Nan
+nan	Taigi	Taigi
+nan	Taiwanese	Taiwanese
 nao	Naaba	Naaba
 nap	Neapolitan	Neapolitan
 naq	Khoekhoe	Khoekhoe
@@ -5651,9 +5661,11 @@ pov	Upper Guinea Crioulo	Crioulo, Upper Guinea
 pow	San Felipe Otlaltepec Popoloca	Popoloca, San Felipe Otlaltepec
 pox	Polabian	Polabian
 poy	Pogolo	Pogolo
+ppe	Baiyamo	Baiyamo
 ppe	Papi	Papi
 ppi	Paipai	Paipai
-ppk	Uma	Uma
+ppk	Uma (Indonesia)	Uma (Indonesia)
+ppl	Central American Nawat	Central American Nawat
 ppl	Nicarao	Nicarao
 ppl	Pipil	Pipil
 ppm	Papuma	Papuma
@@ -5938,6 +5950,7 @@ rob	Tae'	Tae'
 roc	Cacgia Roglai	Roglai, Cacgia
 rod	Rogo	Rogo
 roe	Ronji	Ronji
+roe	Uma (Papua New Guinea)	Uma (Papua New Guinea)
 rof	Rombo	Rombo
 rog	Northern Roglai	Roglai, Northern
 roh	Romansh	Romansh
@@ -6106,6 +6119,7 @@ sej	Sene	Sene
 sek	Sekani	Sekani
 sel	Selkup	Selkup
 sen	Nanerigé Sénoufo	Sénoufo, Nanerigé
+seo	Asaba	Asaba
 seo	Suarmin	Suarmin
 sep	Sìcìté Sénoufo	Sénoufo, Sìcìté
 seq	Senara Sénoufo	Sénoufo, Senara
@@ -6404,6 +6418,7 @@ ssg	Seimat	Seimat
 ssh	Shihhi Arabic	Arabic, Shihhi
 ssi	Sansi	Sansi
 ssj	Sausi	Sausi
+ssj	Wia	Wia
 ssk	Sunam	Sunam
 ssl	Western Sisaala	Sisaala, Western
 ssm	Semnam	Semnam
@@ -7142,7 +7157,7 @@ ull	Ullatan	Ullatan
 ulm	Ulumanda'	Ulumanda'
 uln	Unserdeutsch	Unserdeutsch
 ulu	Uma' Lung	Uma' Lung
-ulw	Ulwa	Ulwa
+ulw	Ulwa (Nicaragua)	Ulwa (Nicaragua)
 uly	Buli	Buli
 uma	Umatilla	Umatilla
 umb	Umbundu	Umbundu
@@ -7180,6 +7195,7 @@ urc	Urningangg	Urningangg
 urd	Urdu	Urdu
 ure	Uru	Uru
 urf	Uradhi	Uradhi
+urg	Kobuka	Kobuka
 urg	Urigina	Urigina
 urh	Urhobo	Urhobo
 uri	Urim	Urim
@@ -7666,6 +7682,7 @@ xin	Xinca	Xinca
 xir	Xiriâna	Xiriâna
 xis	Kisan	Kisan
 xiv	Indus Valley Language	Indus Valley Language
+xiw	Shiwa	Shiwa
 xiy	Xipaya	Xipaya
 xjb	Minjungbal	Minjungbal
 xjt	Jaitmatang	Jaitmatang
@@ -7957,10 +7974,12 @@ yes	Nyankpa	Nyankpa
 yet	Yetfa	Yetfa
 yeu	Yerukula	Yerukula
 yev	Yapunda	Yapunda
+yev	Yeri	Yeri
 yey	Yeyi	Yeyi
 yga	Malyangapa	Malyangapa
 ygi	Yiningayi	Yiningayi
 ygl	Yangum Gel	Yangum Gel
+ygm	Tanda	Tanda
 ygm	Yagomi	Yagomi
 ygp	Gepo	Gepo
 ygr	Yagaria	Yagaria
@@ -8006,9 +8025,13 @@ ykr	Yekora	Yekora
 ykt	Kathu	Kathu
 yku	Kuamasi	Kuamasi
 yky	Yakoma	Yakoma
+yla	Ulwa (Papua New Guinea)	Ulwa (Papua New Guinea)
 yla	Yaul	Yaul
 ylb	Yaleba	Yaleba
+yle	Rossel	Rossel
 yle	Yele	Yele
+yle	Yeletnye	Yeletnye
+yle	Yeli Dnye	Yeli Dnye
 ylg	Yelogu	Yelogu
 yli	Angguruk Yali	Yali, Angguruk
 yll	Yil	Yil

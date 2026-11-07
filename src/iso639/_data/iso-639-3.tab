@@ -27,7 +27,7 @@ abc				I	L	Ambala Ayta
 abd				I	L	Manide	
 abe				I	L	Western Abnaki	
 abf				I	L	Abai Sungai	
-abg				I	L	Abaga	
+abg				I	L	Wagama	
 abh				I	L	Tajiki Arabic	
 abi				I	L	Abidji	
 abj				I	E	Aka-Bea	
@@ -387,7 +387,6 @@ ass				I	L	Ipulo
 ast	ast	ast		I	L	Asturian	
 asu				I	L	Tocantins Asurini	
 asv				I	L	Asoa	
-asw				I	L	Australian Aborigines Sign Language	
 asx				I	L	Muratayak	
 asy				I	L	Yaosakor Asmat	
 asz				I	L	As	
@@ -395,7 +394,7 @@ ata				I	L	Pele-Ata
 atb				I	L	Zaiwa	
 atc				I	E	Atsahuaca	
 atd				I	L	Ata Manobo	
-ate				I	L	Atemble	
+ate				I	L	Mand	
 atg				I	L	Ivbie North-Okpela-Arhe	
 ati				I	L	Attié	
 atj				I	L	Atikamekw	
@@ -1544,7 +1543,7 @@ dga				I	L	Southern Dagaare
 dgb				I	L	Bunoge Dogon	
 dgc				I	L	Casiguran Dumagat Agta	
 dgd				I	L	Dagaari Dioula	
-dge				I	L	Degenan	
+dge				I	L	Degenang	
 dgg				I	L	Doga	
 dgh				I	L	Dghwede	
 dgi				I	L	Northern Dagara	
@@ -1930,6 +1929,7 @@ fip				I	L	Fipa
 fir				I	L	Firan	
 fit				I	L	Tornedalen Finnish	
 fiw				I	L	Fiwaga	
+fjs				I	L	Fiji Sign Language	
 fkk				I	L	Kirya-Konzəl	
 fkv				I	L	Kven Finnish	
 fla				I	L	Kalispel-Pend d'Oreille	
@@ -2591,7 +2591,7 @@ ikp				I	L	Ikpeshi
 ikr				I	E	Ikaranggal	
 iks				I	L	Inuit Sign Language	
 ikt				I	L	Inuinnaqtun	
-iku	iku	iku	iu	M	L	Inuktitut	
+iku	iku	iku	iu	M	L	Canadian Inuktut	
 ikv				I	L	Iku-Gora-Ankwa	
 ikw				I	L	Ikwere	
 ikx				I	L	Ik	
@@ -3206,7 +3206,7 @@ kou				I	L	Koke
 kov				I	L	Kudu-Camo	
 kow				I	L	Kugama	
 koy				I	L	Koyukon	
-koz				I	L	Korak	
+koz				I	L	Amako	
 kpa				I	L	Kutto	
 kpb				I	L	Mullu Kurumba	
 kpc				I	L	Curripaco	
@@ -3700,7 +3700,7 @@ lnh				I	L	Lanoh
 lni				I	L	Daantanai'	
 lnj				I	E	Leningitij	
 lnl				I	L	South Central Banda	
-lnm				I	L	Langam	
+lnm				I	L	Pondi	
 lnn				I	L	Lorediakarkar	
 lns				I	L	Lamnso'	
 lnu				I	L	Longuda	
@@ -3995,7 +3995,7 @@ mgp				I	L	Magar
 mgq				I	L	Malila	
 mgr				I	L	Mambwe-Lungu	
 mgs				I	L	Manda (Tanzania)	
-mgt				I	L	Mongol	
+mgt				I	L	Mwakai	
 mgu				I	L	Mailu	
 mgv				I	L	Matengo	
 mgw				I	L	Matumbi	
@@ -5366,10 +5366,10 @@ pov				I	L	Upper Guinea Crioulo
 pow				I	L	San Felipe Otlaltepec Popoloca	
 pox				I	E	Polabian	
 poy				I	L	Pogolo	
-ppe				I	L	Papi	
+ppe				I	L	Baiyamo	
 ppi				I	L	Paipai	
-ppk				I	L	Uma	
-ppl				I	L	Pipil	
+ppk				I	L	Uma (Indonesia)	
+ppl				I	L	Central American Nawat	
 ppm				I	L	Papuma	
 ppn				I	L	Papapana	
 ppo				I	L	Folopa	
@@ -5637,7 +5637,7 @@ rnw				I	L	Rungwa
 rob				I	L	Tae'	
 roc				I	L	Cacgia Roglai	
 rod				I	L	Rogo	
-roe				I	L	Ronji	
+roe				I	L	Uma (Papua New Guinea)	
 rof				I	L	Rombo	
 rog				I	L	Northern Roglai	
 roh	roh	roh	rm	I	L	Romansh	
@@ -5796,7 +5796,7 @@ sej				I	L	Sene
 sek				I	L	Sekani	
 sel	sel	sel		I	L	Selkup	
 sen				I	L	Nanerigé Sénoufo	
-seo				I	L	Suarmin	
+seo				I	L	Asaba	
 sep				I	L	Sìcìté Sénoufo	
 seq				I	L	Senara Sénoufo	
 ser				I	L	Serrano	
@@ -6080,7 +6080,7 @@ ssf				I	L	Thao
 ssg				I	L	Seimat	
 ssh				I	L	Shihhi Arabic	
 ssi				I	L	Sansi	
-ssj				I	L	Sausi	
+ssj				I	L	Wia	
 ssk				I	L	Sunam	
 ssl				I	L	Western Sisaala	
 ssm				I	L	Semnam	
@@ -6789,7 +6789,7 @@ ull				I	L	Ullatan
 ulm				I	L	Ulumanda'	
 uln				I	L	Unserdeutsch	
 ulu				I	L	Uma' Lung	
-ulw				I	L	Ulwa	
+ulw				I	L	Ulwa (Nicaragua)	
 uly				I	L	Buli	
 uma				I	L	Umatilla	
 umb	umb	umb		I	L	Umbundu	
@@ -6825,7 +6825,7 @@ urc				I	E	Urningangg
 urd	urd	urd	ur	I	L	Urdu	
 ure				I	L	Uru	
 urf				I	E	Uradhi	
-urg				I	L	Urigina	
+urg				I	L	Kobuka	
 urh				I	L	Urhobo	
 uri				I	L	Urim	
 urk				I	L	Urak Lawoi'	
@@ -7285,6 +7285,7 @@ xin				I	E	Xinca
 xir				I	E	Xiriâna	
 xis				I	L	Kisan	
 xiv				I	H	Indus Valley Language	
+xiw				I	L	Shiwa	
 xiy				I	L	Xipaya	
 xjb				I	E	Minjungbal	
 xjt				I	E	Jaitmatang	
@@ -7562,12 +7563,12 @@ yer				I	L	Tarok
 yes				I	L	Nyankpa	
 yet				I	L	Yetfa	
 yeu				I	L	Yerukula	
-yev				I	L	Yapunda	
+yev				I	L	Yeri	
 yey				I	L	Yeyi	
 yga				I	E	Malyangapa	
 ygi				I	E	Yiningayi	
 ygl				I	L	Yangum Gel	
-ygm				I	L	Yagomi	
+ygm				I	L	Tanda	
 ygp				I	L	Gepo	
 ygr				I	L	Yagaria	
 ygs				I	L	Yolŋu Sign Language	
@@ -7610,9 +7611,9 @@ ykr				I	L	Yekora
 ykt				I	L	Kathu	
 yku				I	L	Kuamasi	
 yky				I	L	Yakoma	
-yla				I	L	Yaul	
+yla				I	L	Ulwa (Papua New Guinea)	
 ylb				I	L	Yaleba	
-yle				I	L	Yele	
+yle				I	L	Yeli Dnye	
 ylg				I	L	Yelogu	
 yli				I	L	Angguruk Yali	
 yll				I	L	Yil	

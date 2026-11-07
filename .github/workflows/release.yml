@@ -18,7 +18,7 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Set up Python
-        run: uv python install 3.14
+        run: uv python install 3.15
 
       - name: Build sdist and wheel
         run: uvx --from build pyproject-build --installer uv
